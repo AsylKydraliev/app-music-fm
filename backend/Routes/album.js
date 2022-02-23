@@ -53,9 +53,9 @@ router.post('/', upload.single('image'), async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:_id', async (req, res, next) => {
     try{
-        const album = await Album.findOne({id: req.params.id});
+        const album = await Album.findOne({_id: req.params._id});
 
         if(!album){
             res.status(400).send({error: 'This album does not exist'})
