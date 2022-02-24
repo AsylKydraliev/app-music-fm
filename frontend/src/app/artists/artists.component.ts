@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 })
 export class ArtistsComponent implements OnInit {
   artists!: Artist[];
-  api = environment.apiUrl + '/artists/';
+  api = environment.apiUrl;
 
   constructor(private httpService: HttpService) { }
 

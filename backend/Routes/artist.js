@@ -27,6 +27,15 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.delete('/:id', async (req, res, next) => {
+    try{
+        const artists = await Artist.deleteOne({_id: req.params.id});
+        return res.send(artists);
+    }catch (e){
+        next(e);
+    }
+});
+
 router.post('/', upload.single('photo'), async (req, res, next) => {
     try{
         if(!req.body.title){
