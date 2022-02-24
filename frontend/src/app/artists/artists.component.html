@@ -1,0 +1,12 @@
+<div class="content">
+  <mat-card class="example-card" *ngFor="let artist of artists">
+    <mat-card-title-group>
+      <mat-card-title>{{ artist.title }}</mat-card-title>
+      <img
+        mat-card-md-image
+        [src]="api + '/uploads/' + artist.photo"
+        [alt]="artist.title">
+    </mat-card-title-group>
+  </mat-card>
+</div>
+

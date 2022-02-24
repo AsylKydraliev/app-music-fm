@@ -20,12 +20,11 @@ const upload = multer({storage});
 
 router.get('/', async (req, res, next) => {
     try{
-        if(req.query){
-            const albumsByArtistId = await Album.find({artist_id: req.query.artist_id});
-
-            return res.send(albumsByArtistId);
-        }
-        const albums = await Album.find();
+       const query = {};
+       if (req.query.artist_id){
+           query.artist_id = {_id: req.query.artist_id};
+       }
+        const albums = await Album.find(query).populate('artist_id', 'title');
 
         return res.send(albums);
     }catch (e){

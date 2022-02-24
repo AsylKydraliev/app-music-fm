@@ -44,7 +44,6 @@ router.post('/', upload.single('photo'), async (req, res, next) => {
         }
 
         const artist = new Artist(artistObj);
-        console.log(artist)
         await artist.save();
 
         return res.send(artist);

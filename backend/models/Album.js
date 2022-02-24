@@ -7,7 +7,8 @@ const AlbumSchema = new Schema({
         required: true
     },
     artist_id: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Artist',
         required: true
     },
     year: String,
