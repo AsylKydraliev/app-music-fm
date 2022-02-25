@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { FlexModule } from '@angular/flex-layout';
+import { EffectsModule } from '@ngrx/effects';
+import { artistsReducer } from './store/artists.reducer';
 
 @NgModule({
   declarations: [
@@ -23,10 +25,13 @@ import { FlexModule } from '@angular/flex-layout';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({
+      artists: artistsReducer
+    }, {}),
     MatToolbarModule,
     MatCardModule,
-    FlexModule
+    FlexModule,
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

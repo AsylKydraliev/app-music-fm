@@ -10,6 +10,7 @@ const port = 8000;
 
 app.use(cors({origin: 'http://localhost:4200'}));
 app.use(express.json());
+app.use(express.static('public'));
 app.use('/artists', artists);
 app.use('/albums', albums);
 
