@@ -1,27 +1,27 @@
-<!--<div fxLayout="row" fxLayoutAlign="space-between flex-start">-->
-<!--  <h1>Albums</h1>-->
-<!--</div>-->
+<div fxLayout="row" fxLayoutAlign="center center">
+  <h1>Albums</h1>
+</div>
 
-<!--<div class="error" *ngIf="error | async">-->
-<!--  {{ error | async }}-->
-<!--</div>-->
+<mat-progress-spinner
+  *ngIf="loading | async else albumsArea" mode="indeterminate"
+></mat-progress-spinner>
 
-<!--<mat-progress-spinner-->
-<!--  *ngIf="loading | async else artistsArea" mode="indeterminate"-->
-<!--&gt;</mat-progress-spinner>-->
+<ng-template #albumsArea>
+  <div class="content" fxLayout="row wrap">
+    <mat-card class="example-card" *ngFor="let album of albums | async">
+      <mat-card-title-group>
+        <mat-card-title>{{ album.title }}</mat-card-title>
+        <img
+          mat-card-md-image
+          [src]="api + '/uploads/' + album.image"
+          [alt]="album.title">
+      </mat-card-title-group>
+      <mat-card-content>
+        {{ album.year }}
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-template>
 
-<!--<ng-template #artistsArea>-->
-<!--  <div class="content">-->
-<!--    <mat-card class="example-card" *ngFor="let artist of artists | async">-->
-<!--      <mat-card-title-group>-->
-<!--        <mat-card-title>{{ artist.title }}</mat-card-title>-->
-<!--        <img-->
-<!--          mat-card-md-image-->
-<!--          [src]="api + '/uploads/' + artist.photo"-->
-<!--          [alt]="artist.title">-->
-<!--      </mat-card-title-group>-->
-<!--    </mat-card>-->
-<!--  </div>-->
-<!--</ng-template>-->
 
 

@@ -9,13 +9,13 @@ import { catchError, map, mergeMap, of } from 'rxjs';
 export class AlbumsEffects {
   fetchAlbums = createEffect(() => this.actions.pipe(
     ofType(fetchAlbumsRequest),
-    mergeMap(artist_id => this.httpService.getAlbumsByArtist({artist_id})).pipe(
+    mergeMap(id => this.httpService.getAlbumsByArtist(id.artist_id).pipe(
       map(albums => fetchAlbumsSuccess({albums})),
       catchError(() => of(fetchAlbumsFailure({
         error: 'Something went wrong'
       })))
     )
-  ));
+  )));
 
   constructor(
     private httpService: HttpService,

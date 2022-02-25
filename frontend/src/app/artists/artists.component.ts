@@ -29,6 +29,6 @@ export class ArtistsComponent implements OnInit {
   }
 
   showAlbums(_id: string) {
-    this.store.dispatch(fetchAlbumsRequest({artist_id:_id}));
+    this.store.dispatch(fetchAlbumsRequest({artist_id: _id}));
   }
 }

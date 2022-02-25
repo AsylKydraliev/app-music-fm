@@ -41,7 +41,7 @@ router.post('/', upload.single('image'), async (req, res, next) => {
         const albumObj = {
             title: req.body.title,
             artist_id: req.body.artist_id,
-            year: req.body.info,
+            year: req.body.year,
             image: null
         };
 
