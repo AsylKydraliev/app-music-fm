@@ -14,6 +14,9 @@ import { FlexModule } from '@angular/flex-layout';
 import { EffectsModule } from '@ngrx/effects';
 import { artistsReducer } from './store/artists.reducer';
 import { ArtistsEffects } from './store/artists.effects';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { albumsReducer } from './store/albums.reducer';
+import { AlbumsEffects } from './store/albums.effects';
 
 @NgModule({
   declarations: [
@@ -27,14 +30,16 @@ import { ArtistsEffects } from './store/artists.effects';
     BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot({
-      artists: artistsReducer
+      artists: artistsReducer,
+      albums: albumsReducer
     }, {}),
     MatToolbarModule,
     MatCardModule,
     FlexModule,
-    EffectsModule.forRoot([ArtistsEffects])
+    EffectsModule.forRoot([ArtistsEffects, AlbumsEffects]),
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
