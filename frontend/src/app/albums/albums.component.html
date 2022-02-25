@@ -10,11 +10,16 @@
   <div class="content" fxLayout="row wrap">
     <mat-card class="example-card" *ngFor="let album of albums | async">
       <img
-        mat-card-xl-image
+        mat-card-lg-image
         [src]="api + '/uploads/' + album.image"
         [alt]="album.title">
       <mat-card-title-group>
-        <mat-card-title>{{ album.title }}</mat-card-title>
+        <mat-card-title fxLayoutAlign="center center">
+          <span class="material-icons">
+            album
+          </span>
+          {{ album.title }}
+        </mat-card-title>
       </mat-card-title-group>
       <mat-card-content>
         Release year:

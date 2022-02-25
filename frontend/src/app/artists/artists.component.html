@@ -13,7 +13,12 @@
       *ngFor="let artist of artists | async"
       fxLayout="column" fxLayoutAlign="space-between"
     ><mat-card-title-group>
-      <mat-card-title>{{ artist.title }}</mat-card-title>
+      <mat-card-title fxLayoutAlign="center center">
+        <span class="material-icons">
+          library_music
+        </span>
+        {{ artist.title }}
+      </mat-card-title>
       <mat-card-content mat-card-avatar>
         <img
           [src]="api + '/uploads/' + artist.photo"
