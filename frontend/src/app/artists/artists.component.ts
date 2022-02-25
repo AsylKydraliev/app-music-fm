@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/types';
 import { Observable } from 'rxjs';
 import { fetchArtistsRequest } from '../store/artists.actions';
-import { fetchAlbumsRequest } from '../store/albums.actions';
 
 @Component({
   selector: 'app-artists',
@@ -26,9 +25,5 @@ export class ArtistsComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(fetchArtistsRequest());
-  }
-
-  showAlbums(_id: string) {
-    this.store.dispatch(fetchAlbumsRequest({artist_id: _id}));
   }
 }

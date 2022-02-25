@@ -7,21 +7,19 @@
 ></mat-progress-spinner>
 
 <ng-template #artistsArea>
-  <div class="content" fxLayout="row wrap">
+  <div class="content" fxLayout="column">
     <mat-card
-      [routerLink]="['artistAlbums']"
+      [routerLink]="[artist._id,artist.title, 'artistAlbums']"
       *ngFor="let artist of artists | async"
-      (click)="showAlbums(artist._id)"
-      fxLayout="column" fxLayoutAlign="center center"
+      fxLayout="column" fxLayoutAlign="space-between"
     ><mat-card-title-group>
-        <mat-card-title>{{ artist.title }}</mat-card-title>
-      </mat-card-title-group>
-      <mat-card-content>
+      <mat-card-title>{{ artist.title }}</mat-card-title>
+      <mat-card-content mat-card-avatar>
         <img
-          mat-card-xl-image
           [src]="api + '/uploads/' + artist.photo"
           [alt]="artist.title">
       </mat-card-content>
+    </mat-card-title-group>
     </mat-card>
   </div>
 </ng-template>

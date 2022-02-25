@@ -10,6 +10,7 @@ import { Album, ApiAlbumsData } from '../models/album.model';
 })
 
 export class HttpService{
+  id!: string;
   constructor(private http: HttpClient) {}
 
   getArtists(){

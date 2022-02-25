@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="center center">
-  <h1>Albums</h1>
+  <h1>{{ title }}</h1>
 </div>
 
 <mat-progress-spinner
@@ -9,15 +9,16 @@
 <ng-template #albumsArea>
   <div class="content" fxLayout="row wrap">
     <mat-card class="example-card" *ngFor="let album of albums | async">
+      <img
+        mat-card-xl-image
+        [src]="api + '/uploads/' + album.image"
+        [alt]="album.title">
       <mat-card-title-group>
         <mat-card-title>{{ album.title }}</mat-card-title>
-        <img
-          mat-card-md-image
-          [src]="api + '/uploads/' + album.image"
-          [alt]="album.title">
       </mat-card-title-group>
       <mat-card-content>
-        {{ album.year }}
+        Release year:
+        <strong>{{ album.year }}</strong>
       </mat-card-content>
     </mat-card>
   </div>

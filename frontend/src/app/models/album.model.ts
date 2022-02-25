@@ -2,7 +2,10 @@ export class Album {
   constructor(
     public _id: string,
     public title: string,
-    public artist_id: string,
+    public artist_id: {
+      _id: string,
+      title: string
+    },
     public year: string,
     public image: string
   ) {}
@@ -11,7 +14,10 @@ export class Album {
 export interface AlbumData {
   _id: string,
   title: string,
-  artist_id: string,
+  artist_id: {
+    _id: string,
+    title: string
+  },
   year: string,
   image: File | null,
 }
@@ -19,7 +25,10 @@ export interface AlbumData {
 export interface ApiAlbumsData {
   _id: string,
   title: string,
-  artist_id: string,
+  artist_id: {
+    _id: string,
+    title: string
+  },
   year: string,
   image: string,
 }
