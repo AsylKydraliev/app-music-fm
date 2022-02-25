@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import { fetchArtistsFailure, fetchArtistsRequest, fetchArtistsSuccess } from './artists.actions';
-import { Artist } from '../models/artist.model';
+import { ArtistsState } from './types';
 
-const initialState = {
-  artists: <Artist[]>[],
+const initialState: ArtistsState = {
+  artists: [],
   fetchLoading: false,
-  fetchError: <null | string>null
+  fetchError: null
 };
 
 export const artistsReducer = createReducer(

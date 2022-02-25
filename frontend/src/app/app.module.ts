@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexModule } from '@angular/flex-layout';
 import { EffectsModule } from '@ngrx/effects';
 import { artistsReducer } from './store/artists.reducer';
+import { ArtistsEffects } from './store/artists.effects';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { artistsReducer } from './store/artists.reducer';
     MatToolbarModule,
     MatCardModule,
     FlexModule,
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([ArtistsEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

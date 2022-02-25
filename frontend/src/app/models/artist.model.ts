@@ -13,3 +13,10 @@ export interface ArtistData {
   photo: File | null,
   info: string,
 }
+
+export interface ApiArtistData {
+  _id: string,
+  title: string,
+  photo: string,
+  info: string,
+}
