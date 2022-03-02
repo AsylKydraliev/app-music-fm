@@ -4,6 +4,7 @@ const cors = require('cors');
 const artists = require('./Routes/artist');
 const albums = require('./Routes/album');
 const users = require('./Routes/users');
+const tracks = require('./Routes/tracks');
 const config = require('./config');
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use('/artists', artists);
 app.use('/albums', albums);
+app.use('/tracks', tracks);
 app.use('/users', users);
 
 const run = async () => {
