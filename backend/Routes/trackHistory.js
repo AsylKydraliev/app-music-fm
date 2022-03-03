@@ -6,6 +6,10 @@ const router = express.Router();
 
 router.post('/', async(req, res, next) => {
     try{
+        if(!req.body.user || !req.body.track){
+            return res.status(400).send({error: 'Something went wrong'})
+        }
+
         const trackHistory = new TrackHistory({
             user: req.body.user,
             track: req.body.track,

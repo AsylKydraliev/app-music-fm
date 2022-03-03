@@ -6,7 +6,15 @@ const router = express.Router();
 
 router.post('/', async(req, res, next) => {
    try{
-       const track = new Track(req.body);
+       if(!req.body.title || !req.body.album || !req.body.duration){
+           return res.status(400).send({error: 'Something went wrong'})
+       }
+
+       const track = new Track({
+           title: req.body.title,
+           album: req.body.album,
+           duration: req.body.duration,
+       });
 
        await track.save()
         res.send(track);

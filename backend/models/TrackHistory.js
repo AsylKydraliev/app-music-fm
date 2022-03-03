@@ -14,7 +14,6 @@ const TrackHistorySchema = new Schema({
     },
     datetime: {
         type: String,
-        required: true
     }
 })
 
