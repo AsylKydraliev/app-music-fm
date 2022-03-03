@@ -18,4 +18,23 @@ router.post('/', async(req, res, next) => {
    }
 });
 
+router.get('/', async(req, res, next) => {
+    try{
+        const query = {};
+
+        if(req.query.album){
+            query.album = {_id: req.query.album};
+        }
+
+        const tracks = await Track.find(query).populate('album', 'title');
+
+        return res.send(tracks);
+    } catch(error){
+        if(error instanceof mongoose.Error.ValidationError){
+            return res.status(400).send(error);
+        }
+        return next(error)
+    }
+});
+
 module.exports = router;
