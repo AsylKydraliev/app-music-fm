@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
+const {nanoid} = require("nanoid");
 
 const UserSchema = new Schema({
     username: {
@@ -29,11 +30,19 @@ UserSchema.pre('save', async function (next) {
 });
 
 UserSchema.set('toJSON', {
-    transform: (doc, ret, options) => {
+    transform: (doc, ret) => {
         delete ret.password;
         return ret;
     }
-})
+});
+
+UserSchema.methods.checkPassword = function (password) {
+    return bcrypt.compare(password, this.password);
+};
+
+UserSchema.methods.generateToken = function () {
+    this.token = nanoid();
+};
 
 const User = mongoose.model('User', UserSchema);
 

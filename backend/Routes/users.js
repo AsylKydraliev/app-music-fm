@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const User = require('../models/User');
-const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
@@ -16,7 +15,9 @@ router.post('/', async (req, res, next)=>{
            password: req.body.password
        });
 
+       user.generateToken();
        await user.save();
+
        return res.send(user);
    } catch(error){
        if(error instanceof mongoose.Error.ValidationError){
@@ -34,20 +35,25 @@ router.post('/sessions', async (req, res, next) => {
             return res.status(400).send({error: 'Wrong data'});
         }
 
-        const isMatch = await bcrypt.compare(req.body.password, user.password);
+        const isMatch = await user.checkPassword(req.body.password);
 
         if(!isMatch) {
             return res.status(400).send({error: 'Wrong data'});
         }
 
-        return res.send({message: 'Data is correct'});
+        user.generateToken();
+        await user.save();
+
+        return res.send({token: user.token});
+
     }catch (error){
         if(error instanceof mongoose.Error.ValidationError){
             return res.status(400).send(error);
         }
         return next(error);
    }
-
 });
+
+
 
 module.exports = router;
