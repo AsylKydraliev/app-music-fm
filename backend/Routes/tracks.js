@@ -27,36 +27,29 @@ router.post('/', async(req, res, next) => {
    }
 });
 
+let tracks = [];
+
 router.get('/', async(req, res, next) => {
     try{
         const query = {};
 
         if(req.query.album){
             query.album = {_id: req.query.album};
+            tracks = await Track.find(query).populate('album', 'title artist_id');
+
+            return res.send(tracks);
         }
 
-        const tracks = await Track.find(query).populate('album', 'title');
-
-        return res.send(tracks);
-    } catch(error){
-        if(error instanceof mongoose.Error.ValidationError){
-            return res.status(400).send(error);
-        }
-        return next(error);
-    }
-});
-
-router.get('/', async(req, res, next) => {
-    try{
-        const query = {};
+        let tracksByArtistId = [];
 
         if(req.query.artist_id){
-            query.artist_id = {_id: req.query.artist_id};
+            const albums = await Album.find({artist_id: {_id: req.query.artist_id}});
+
+            for(let album of albums){
+                tracksByArtistId = await Track.find({album: {_id: album._id}});
+            }
+            return res.send(tracksByArtistId);
         }
-
-        const tracks = await Album.find(query).populate('artist_id', 'title');
-
-        return res.send(tracks);
     } catch(error){
         if(error instanceof mongoose.Error.ValidationError){
             return res.status(400).send(error);
