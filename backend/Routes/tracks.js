@@ -1,13 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Track = require('../models/Track');
+const Album = require("../models/Album");
 
 const router = express.Router();
 
 router.post('/', async(req, res, next) => {
    try{
        if(!req.body.title || !req.body.album || !req.body.duration){
-           return res.status(400).send({error: 'Something went wrong'})
+           return res.status(400).send({error: 'Something went wrong'});
        }
 
        const track = new Track({
@@ -16,13 +17,13 @@ router.post('/', async(req, res, next) => {
            duration: req.body.duration,
        });
 
-       await track.save()
+       await track.save();
         res.send(track);
    } catch(error){
        if(error instanceof mongoose.Error.ValidationError){
            return res.status(400).send(error);
        }
-       return next(error)
+       return next(error);
    }
 });
 
@@ -41,7 +42,26 @@ router.get('/', async(req, res, next) => {
         if(error instanceof mongoose.Error.ValidationError){
             return res.status(400).send(error);
         }
-        return next(error)
+        return next(error);
+    }
+});
+
+router.get('/', async(req, res, next) => {
+    try{
+        const query = {};
+
+        if(req.query.artist_id){
+            query.artist_id = {_id: req.query.artist_id};
+        }
+
+        const tracks = await Album.find(query).populate('artist_id', 'title');
+
+        return res.send(tracks);
+    } catch(error){
+        if(error instanceof mongoose.Error.ValidationError){
+            return res.status(400).send(error);
+        }
+        return next(error);
     }
 });
 

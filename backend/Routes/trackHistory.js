@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/', authorization, async(req, res, next) => {
     try{
         if(!req.body.track){
-            return res.status(400).send({error: 'Something went wrong'})
+            return res.status(400).send({error: 'Something went wrong'});
         }
 
         const trackHistory = new TrackHistory({
@@ -23,7 +23,7 @@ router.post('/', authorization, async(req, res, next) => {
         if(error instanceof mongoose.Error.ValidationError){
             return res.status(400).send(error);
         }
-        return next(error)
+        return next(error);
     }
 });
 
