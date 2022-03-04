@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Track = require('../models/Track');
 const Album = require("../models/Album");
+const Artist = require("../models/Artist");
 
 const router = express.Router();
 
@@ -51,6 +52,27 @@ router.get('/', async(req, res, next) => {
             return res.send(tracksByArtistId);
         }
     } catch(error){
+        if(error instanceof mongoose.Error.ValidationError){
+            return res.status(400).send(error);
+        }
+        return next(error);
+    }
+});
+
+router.get('/byAlbum/:id', async(req,res,next) => {
+    try{
+        const albumInfo = await Album.find({_id: req.params.id}).populate('artist_id', '_id title');
+        const artistInfo = await Artist.find({_id: albumInfo[0].artist_id._id});
+        const tracksInfo = await Track.find({album: {_id: albumInfo[0]._id}}).populate('album', 'title');
+
+        const album = {
+            artist: artistInfo[0],
+            album: albumInfo[0],
+            tracks: tracksInfo,
+        }
+
+        res.send(album);
+    }catch (error){
         if(error instanceof mongoose.Error.ValidationError){
             return res.status(400).send(error);
         }
