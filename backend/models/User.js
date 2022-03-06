@@ -8,6 +8,13 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         unique: true,
+        validate: {
+            validator: async value => {
+                const user = await User.findOne({email: value});
+                if(user) return false;
+            },
+            message: 'This user already registered!'
+        }
     },
     password: {
         type: String,

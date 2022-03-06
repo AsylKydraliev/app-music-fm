@@ -21,10 +21,6 @@ const upload = multer({storage});
 
 router.post('/', upload.single('avatar'), async (req, res, next)=>{
    try{
-       if(!req.body.email || !req.body.password || !req.body.displayName){
-           return res.status(400).send({error: 'Something went wrong'})
-       }
-
        const user = new User({
            email: req.body.email,
            password: req.body.password,
