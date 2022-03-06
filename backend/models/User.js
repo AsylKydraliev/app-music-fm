@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const {nanoid} = require("nanoid");
 
 const UserSchema = new Schema({
-    username: {
+    email: {
         type: String,
         required: true,
         unique: true,
