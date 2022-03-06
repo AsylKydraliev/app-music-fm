@@ -1,19 +1,40 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const multer = require("multer");
+const {nanoid} = require("nanoid");
+const path = require("path");
 const User = require('../models/User');
+const config = require("../config");
 
 const router = express.Router();
 
-router.post('/', async (req, res, next)=>{
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, config.uploadPath);
+    },
+    filename: (req, file, cb) => {
+        cb(null, nanoid() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({storage});
+
+router.post('/', upload.single('avatar'), async (req, res, next)=>{
    try{
-       if(!req.body.username || !req.body.password){
+       if(!req.body.username || !req.body.password || !req.body.displayName){
            return res.status(400).send({error: 'Something went wrong'})
        }
 
        const user = new User({
            username: req.body.username,
-           password: req.body.password
+           password: req.body.password,
+           displayName: req.body.displayName,
+           avatar: null
        });
+
+       if(req.file){
+           user.avatar = req.file.filename;
+       }
 
        user.generateToken();
        await user.save();

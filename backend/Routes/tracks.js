@@ -71,7 +71,7 @@ router.get('/byAlbum/:id', async(req,res,next) => {
             tracks: tracksInfo,
         }
 
-        res.send(album);
+        return res.send(album);
     }catch (error){
         if(error instanceof mongoose.Error.ValidationError){
             return res.status(400).send(error);

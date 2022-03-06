@@ -16,7 +16,12 @@ const UserSchema = new Schema({
     token: {
         type: String,
         required: true
-    }
+    },
+    displayName: {
+        type: String,
+        required: true,
+    },
+    avatar: String
 });
 
 const SALT_WORK_FACTOR = 10;
