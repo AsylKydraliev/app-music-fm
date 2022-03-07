@@ -23,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { FileInputComponent } from './ui/file-input/file-input.component';
+import { ValidateIdenticalDirective } from './validate-identical.directive';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FileInputComponent } from './ui/file-input/file-input.component';
     AlbumsComponent,
     RegisterComponent,
     FileInputComponent,
-    FileInputComponent
+    FileInputComponent,
+    ValidateIdenticalDirective
   ],
   imports: [
     BrowserModule,

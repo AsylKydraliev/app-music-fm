@@ -2,11 +2,12 @@
   <mat-card class="register-form">
     <mat-card-title>Registration</mat-card-title>
     <mat-card-content>
-      <form #f="ngForm" fxLayout="column" autocomplete="off" (ngSubmit)="onSubmit()">
+      <form #f="ngForm" fxLayout="column" autocomplete="off" (ngSubmit)="onSubmit()"
+            [appIdentical]="['password', 'repeatPassword']">
 
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
-          <input name="email" required autocomplete="username" matInput ngModel #email="ngModel"/>
+          <input name="email" required autocomplete="username" matInput email ngModel #email="ngModel"/>
           <mat-error
             *ngIf="email.touched && email.hasError('required')"
           >Email is required!
@@ -41,12 +42,16 @@
         <mat-form-field appearance="outline">
           <mat-label>Repeat password</mat-label>
           <input
-            type="password" name="repeat-password" autocomplete="new-password"
+            type="password" name="repeatPassword" autocomplete="new-password"
             required matInput ngModel #repeatPassword="ngModel"
           />
           <mat-error
             *ngIf="repeatPassword.touched && repeatPassword.hasError('required')"
           >Password is required!
+          </mat-error>
+          <mat-error
+            *ngIf="repeatPassword.touched && f.errors?.['identical']"
+          >Password should match!
           </mat-error>
         </mat-form-field>
 
@@ -59,7 +64,7 @@
           type="submit"
           mat-raised-button
           color="primary"
-          [disabled]="f.invalid"
+
         >REGISTER</button>
 
       </form>
