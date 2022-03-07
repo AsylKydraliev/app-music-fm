@@ -29,11 +29,13 @@ router.post('/', upload.single('avatar'), async (req, res, next)=>{
        });
 
        if(req.file){
+
            user.avatar = req.file.filename;
        }
-
        user.generateToken();
+
        await user.save();
+       console.log(user)
 
        return res.send(user);
    } catch(error){
@@ -46,7 +48,7 @@ router.post('/', upload.single('avatar'), async (req, res, next)=>{
 
 router.post('/sessions', async (req, res, next) => {
     try{
-        const user = await User.findOne({username: req.body.username});
+        const user = await User.findOne({email: req.body.email});
 
         if(!user){
             return res.status(400).send({error: 'Wrong data'});

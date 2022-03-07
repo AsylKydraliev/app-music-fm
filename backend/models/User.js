@@ -28,7 +28,7 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    avatar: String
+    avatar: null | String
 });
 
 const SALT_WORK_FACTOR = 10;

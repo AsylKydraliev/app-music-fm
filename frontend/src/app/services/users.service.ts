@@ -11,6 +11,15 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   registerUser(userData: RegisterUser){
-    return this.http.post<User>(environment.apiUrl + '/users', userData);
+    const formData = new FormData();
+    formData.append('email', userData.email);
+    formData.append('displayName', userData.displayName);
+    formData.append('password', userData.password);
+
+    if (userData.avatar) {
+      formData.append('avatar', userData.avatar);
+    }
+
+    return this.http.post<User>(environment.apiUrl + '/users', formData);
   }
 }

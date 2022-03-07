@@ -10,7 +10,6 @@ export interface RegisterUser {
   email: string,
   displayName: string,
   password: string,
-  passwordRepeat: string,
   avatar: File | null
 }
 
@@ -19,7 +18,7 @@ export interface FieldError {
 }
 
 export interface  RegisterError {
-  error: {
+  errors: {
     password: FieldError,
     email: FieldError,
     displayName: FieldError

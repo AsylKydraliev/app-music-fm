@@ -24,6 +24,9 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { FileInputComponent } from './ui/file-input/file-input.component';
 import { ValidateIdenticalDirective } from './validate-identical.directive';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { usersReducer } from './store/users.reducer';
+import { UsersEffects } from './store/users.effects';
 
 @NgModule({
   declarations: [
@@ -42,17 +45,19 @@ import { ValidateIdenticalDirective } from './validate-identical.directive';
     HttpClientModule,
     StoreModule.forRoot({
       artists: artistsReducer,
-      albums: albumsReducer
+      albums: albumsReducer,
+      users: usersReducer
     }, {}),
     MatToolbarModule,
     MatCardModule,
     FlexModule,
-    EffectsModule.forRoot([ArtistsEffects, AlbumsEffects]),
+    EffectsModule.forRoot([ArtistsEffects, AlbumsEffects, UsersEffects]),
     MatProgressSpinnerModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

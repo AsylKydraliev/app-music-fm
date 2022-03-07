@@ -16,6 +16,10 @@
             *ngIf="email.touched && email.hasError('email')"
           >Wrong email address!
           </mat-error>
+          <mat-error
+            *ngIf="email.touched && email.hasError('serverError')"
+          >{{ email.getError('serverError') }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -49,11 +53,11 @@
             *ngIf="repeatPassword.touched && repeatPassword.hasError('required')"
           >Password is required!
           </mat-error>
-          <mat-error
-            *ngIf="repeatPassword.touched && f.errors?.['identical']"
-          >Password should match!
-          </mat-error>
         </mat-form-field>
+        <mat-error
+          *ngIf="repeatPassword.touched && f.errors?.['identical']"
+        >Password should match!
+        </mat-error>
 
         <mat-form-field appearance="outline">
           <mat-label>Avatar</mat-label>
@@ -64,7 +68,7 @@
           type="submit"
           mat-raised-button
           color="primary"
-
+          [disabled]="f.invalid"
         >REGISTER</button>
 
       </form>
