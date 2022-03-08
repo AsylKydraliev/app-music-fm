@@ -27,6 +27,7 @@ import { ValidateIdenticalDirective } from './validate-identical.directive';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { usersReducer } from './store/users.reducer';
 import { UsersEffects } from './store/users.effects';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { UsersEffects } from './store/users.effects';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

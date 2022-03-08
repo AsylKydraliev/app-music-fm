@@ -9,7 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class UsersEffects {
-  fetchUser = createEffect(() => this.actions.pipe(
+  registerUser = createEffect(() => this.actions.pipe(
     ofType(registerUserRequest),
     mergeMap(({users}) => this.usersService.registerUser(users).pipe(
       map(user => registerUserSuccess({user})),
