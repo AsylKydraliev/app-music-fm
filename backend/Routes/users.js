@@ -30,7 +30,6 @@ router.post('/', upload.single('avatar'), async (req, res, next)=>{
 
        if(req.file){
            user.avatar = req.file.filename;
-           console.log(req.file);
        }
 
        user.generateToken();
