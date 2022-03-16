@@ -2,3 +2,8 @@ node_modules
 .idea
 public/uploads/*
 !public/uploads/.gitkeep
+!public/uploads/album.jpeg
+!public/uploads/drake.jpg
+!public/uploads/user.png
+!public/uploads/weekend.jpeg
+!public/uploads/west.jpg

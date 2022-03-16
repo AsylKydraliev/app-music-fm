@@ -3,60 +3,126 @@ const {nanoid} = require("nanoid");
 const config = require("./config");
 const User = require("./models/User");
 const Artist = require("./models/Artist");
+const Album = require("./models/Album");
+const Track = require("./models/Track");
 
 const run = async () => {
-  await mongoose.connect(config.mongo.db, config.mongo.options);
+    await mongoose.connect(config.mongo.db, config.mongo.options);
 
-  const collections = await mongoose.connection.db.listCollections().toArray();
+    const collections = await mongoose.connection.db.listCollections().toArray();
 
-  for (const coll of collections) {
-    await mongoose.connection.db.dropCollection(coll.name);
-  }
+    for (const coll of collections) {
+        await mongoose.connection.db.dropCollection(coll.name);
+    }
 
-  const [user, admin] = await User.create({
-    email: 'user@gmail.com',
-    name: 'user',
-    password: '123',
-    token: nanoid(),
-  }, {
-    email: 'admin@gmail.com',
-    name: 'admin',
-    password: '123',
-    token: nanoid(),
-  });
+    await User.create({
+        email: 'user@gmail.com',
+        displayName: 'user',
+        password: '123',
+        token: nanoid(),
+        role: 'user',
+        avatar: 'user.png',
+    }, {
+        email: 'admin@gmail.com',
+        displayName: 'admin',
+        password: '123',
+        token: nanoid(),
+        role: 'admin',
+        avatar: 'user.png',
+    });
 
-  const [cpu, hdd, gpu] = await Artist.create({
-    title: 'CPUs',
-  }, {
-    title: 'HDDs',
-  }, {
-    title: 'GPUs',
-  });
+    const [TheWeekend, KanyeWest, Drake] = await Artist.create({
+        title: 'TheWeekend',
+        photo: 'weekend.jpeg',
+        info: 'The best artist 2020!'
+    }, {
+        title: 'KanyeWest',
+        photo: 'west.jpg',
+        info: 'Top performer 2021!'
+    }, {
+        title: 'Drake',
+        photo: 'drake.jpg',
+        info: 'Amazing performer 2022!'
+    });
 
-  await Product.create({
-    user: user,
-    category: cpu,
-    title: 'Intel Core i7 10700 KF',
-    price: 500,
-    description: '8 Cores / 16 Threads, Socket Type LGA 1200, Up to 5.1 GHz Unlocked',
-    image: 'cpu.png'
-  }, {
-    user: admin,
-    category: hdd,
-    title: 'Seagate BarraCuda 4TB',
-    price: 90,
-    description: 'Store more, compute faster, and do it confidently with the proven reliability of BarraCuda internal hard drives',
-    image: 'cpu.png'
-  }, {
-    user: user1,
-    category: gpu,
-    title: 'Gigabyte Nvidia GeForce RTX 3070 Vision OC',
-    price: 1000,
-    description: 'Powerful GeForce RTX™ 30 VISION series accelerates your work with incredible boosts in performance',
-    image: 'cpu.png'
-  });
+    const [Long, Fourth, Songs] = await Album.create({
+            title: 'Long story short',
+            artist_id: TheWeekend,
+            year: '2020',
+            image: 'album.jpeg',
+        }, {
+            title: 'Fourth dimension',
+            artist_id: KanyeWest,
+            year: '2021',
+            image: 'album.jpeg',
+        }, {
+            title: 'Songs for two',
+            artist_id: Drake,
+            year: '2022',
+            image: 'album.jpeg',
+        },
+    );
 
-  await mongoose.connection.close();
+    await Track.create({
+            title: 'Commercial brake',
+            album: Long,
+            duration: '3:16',
+        }, {
+            title: 'New song',
+            album: Fourth,
+            duration: '3:20',
+        }, {
+            title: 'For two song',
+            album: Songs,
+            duration: '3:21',
+        }, {
+            title: 'Song for new year',
+            album: Long,
+            duration: '3:16',
+        }, {
+            title: 'Song for summer',
+            album: Long,
+            duration: '3:16',
+        }, {
+            title: 'Song for autumn',
+            album: Long,
+            duration: '3:16',
+        }, {
+            title: 'Song for winter Fourth',
+            album: Fourth,
+            duration: '3:20',
+        },{
+            title: 'Song for new year Fourth',
+            album: Fourth,
+            duration: '3:20',
+        }, {
+            title: 'Song for summer Fourth',
+            album: Fourth,
+            duration: '3:20',
+        }, {
+            title: 'Song for autumn Fourth',
+            album: Fourth,
+            duration: '3:20',
+        }, {
+            title: 'For two song Songs',
+            album: Songs,
+            duration: '3:21',
+        },{
+            title: 'For child song Songs',
+            album: Songs,
+            duration: '3:21',
+        },{
+            title: 'For new year song Songs',
+            album: Songs,
+            duration: '3:21',
+        },{
+            title: 'For five song Songs',
+            album: Songs,
+            duration: '3:21',
+        },
+    );
+
+    await mongoose.connection.close();
 };
 
 run().catch(e => console.error(e));
