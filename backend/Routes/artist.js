@@ -4,6 +4,8 @@ const multer = require('multer');
 const Artist = require("../models/Artist");
 const path = require("path");
 const config = require('../config');
+const permit = require("../middleware/permit");
+const authorization = require("../middleware/authorization");
 
 const router = express.Router();
 
@@ -36,7 +38,7 @@ router.delete('/:id', async (req, res, next) => {
     }
 });
 
-router.post('/', upload.single('photo'), async (req, res, next) => {
+router.post('/', authorization, permit('admin'), upload.single('photo'), async (req, res, next) => {
     try{
         if(!req.body.title){
             res.status(400).send({error: 'Title is required'});

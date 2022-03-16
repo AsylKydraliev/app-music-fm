@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const Track = require('../models/Track');
 const Album = require("../models/Album");
 const Artist = require("../models/Artist");
+const authorization = require("../middleware/authorization");
+const permit = require("../middleware/permit");
 
 const router = express.Router();
 
-router.post('/', async(req, res, next) => {
+router.post('/', authorization, permit('admin'),async(req, res, next) => {
    try{
        if(!req.body.title || !req.body.album || !req.body.duration){
            return res.status(400).send({error: 'Something went wrong'});

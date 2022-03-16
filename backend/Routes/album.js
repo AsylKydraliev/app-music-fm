@@ -4,6 +4,8 @@ const multer = require('multer');
 const Album = require("../models/Album");
 const path = require("path");
 const config = require('../config');
+const authorization = require("../middleware/authorization");
+const permit = require("../middleware/permit");
 
 const router = express.Router();
 
@@ -32,7 +34,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.post('/', upload.single('image'), async (req, res, next) => {
+router.post('/', authorization, permit('admin'), upload.single('image'), async (req, res, next) => {
     try{
         if(!req.body.title || !req.body.artist_id){
             res.status(400).send({error: 'Title and artist id is required'});
