@@ -9,9 +9,10 @@ const UserSchema = new Schema({
         required: true,
         unique: true,
         validate: {
-            validator: async value => {
+            validator: async function (value) {
+                if(!this.isModified('email')) return true;
                 const user = await User.findOne({email: value});
-                if(user) return false;
+                return !user;
             },
             message: 'This user already registered!'
         }
@@ -28,7 +29,13 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    avatar: null | String
+    avatar: null | String,
+    role: {
+        type: String,
+        required: true,
+        default: 'user',
+        enum: ['user', 'admin'],
+    }
 });
 
 const SALT_WORK_FACTOR = 10;
