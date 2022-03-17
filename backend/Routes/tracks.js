@@ -8,7 +8,7 @@ const permit = require("../middleware/permit");
 
 const router = express.Router();
 
-router.post('/', authorization, permit('admin'),async(req, res, next) => {
+router.post('/', authorization, permit('admin'), async(req, res, next) => {
    try{
        if(!req.body.title || !req.body.album || !req.body.duration){
            return res.status(400).send({error: 'Something went wrong'});
@@ -30,22 +30,22 @@ router.post('/', authorization, permit('admin'),async(req, res, next) => {
    }
 });
 
-let tracks = [];
-
 router.get('/', async(req, res, next) => {
     try{
         const query = {};
 
         if(req.query.album){
             query.album = {_id: req.query.album};
-            tracks = await Track.find(query).populate('album', 'title artist_id');
+            let tracks = await Track.find(query).populate('album', 'title artist_id');
 
             return res.send(tracks);
+        }else{
+            const allTracks = await Track.find();
+            return res.send(allTracks);
         }
 
-        let tracksByArtistId = [];
-
         if(req.query.artist_id){
+            let tracksByArtistId = [];
             const albums = await Album.find({artist_id: {_id: req.query.artist_id}});
 
             for(let album of albums){
