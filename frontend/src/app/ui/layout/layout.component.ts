@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { User } from '../../models/user.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/types';
+import { logoutUserRequest } from '../../store/users.actions';
 
 @Component({
   selector: 'app-layout',
@@ -9,6 +13,7 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent {
+  user: Observable<null | User>;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -16,6 +21,11 @@ export class LayoutComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private store: Store<AppState>) {
+    this.user = store.select(state => state.users.user);
+  }
 
+  logout(){
+    this.store.dispatch(logoutUserRequest());
+  }
 }

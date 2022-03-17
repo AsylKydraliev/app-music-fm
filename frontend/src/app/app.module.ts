@@ -34,6 +34,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './login/login.component';
 import { localStorageSync } from 'ngrx-store-localstorage';
+import { MatMenuModule } from '@angular/material/menu';
 
 export const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -78,7 +79,8 @@ const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
     MatProgressBarModule,
     MatSidenavModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
