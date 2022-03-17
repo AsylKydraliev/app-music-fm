@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
+import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { ArtistsComponent } from './artists/artists.component';
 import { AlbumsComponent } from './albums/albums.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,6 +28,21 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { usersReducer } from './store/users.reducer';
 import { UsersEffects } from './store/users.effects';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { LayoutComponent } from './ui/layout/layout.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { LoginComponent } from './login/login.component';
+import { localStorageSync } from 'ngrx-store-localstorage';
+
+export const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
+  return localStorageSync({
+    keys: [{users: ['user']}],
+    rehydrate: true
+  })(reducer);
+}
+
+const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
 
 @NgModule({
   declarations: [
@@ -35,9 +50,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ArtistsComponent,
     AlbumsComponent,
     RegisterComponent,
+    LoginComponent,
     FileInputComponent,
-    FileInputComponent,
-    ValidateIdenticalDirective
+    ValidateIdenticalDirective,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +64,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
       artists: artistsReducer,
       albums: albumsReducer,
       users: usersReducer
-    }, {}),
+    }, {metaReducers}),
     MatToolbarModule,
     MatCardModule,
     FlexModule,
@@ -59,7 +75,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatInputModule,
     FormsModule,
     MatSnackBarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
