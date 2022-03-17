@@ -1,3 +1,4 @@
+
 <div fxLayout="row" fxLayoutAlign="center center">
   <h1>{{ title }}</h1>
 </div>
@@ -25,9 +26,11 @@
         Release year:
         <strong>{{ album.year }}</strong>
       </mat-card-content>
+      <a style="font-size: 20px" [routerLink]="['/', album._id, 'tracks']">Tracks</a>
     </mat-card>
   </div>
 </ng-template>
+
 
 
 

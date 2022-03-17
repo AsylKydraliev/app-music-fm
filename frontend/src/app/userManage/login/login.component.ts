@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { LoginError, LoginUserData } from '../models/user.model';
+import { LoginError, LoginUserData } from '../../models/user.model';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/types';
-import { loginUsersRequest } from '../store/users.actions';
+import { AppState } from '../../store/types';
+import { loginUsersRequest } from '../../store/users.actions';
 
 // import { LoginUserData } from '../models/user.model';
 

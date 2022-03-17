@@ -34,7 +34,7 @@ const run = async () => {
     const [TheWeekend, KanyeWest, Drake] = await Artist.create({
         title: 'TheWeekend',
         photo: 'weekend.jpeg',
-        info: 'The best artist 2020!'
+        info: 'The best artist 2020!'``
     }, {
         title: 'KanyeWest',
         photo: 'west.jpg',

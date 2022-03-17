@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
-import { ArtistsComponent } from './artists/artists.component';
-import { AlbumsComponent } from './albums/albums.component';
+import { ArtistsComponent } from './pages/artists/artists.component';
+import { AlbumsComponent } from './pages/albums/albums.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -17,7 +17,7 @@ import { ArtistsEffects } from './store/artists.effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { albumsReducer } from './store/albums.reducer';
 import { AlbumsEffects } from './store/albums.effects';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './userManage/register/register.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -32,9 +32,12 @@ import { LayoutComponent } from './ui/layout/layout.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './userManage/login/login.component';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { MatMenuModule } from '@angular/material/menu';
+import { tracksReducer } from './store/tracks.reducer';
+import { TracksEffects } from './store/tracks.effects';
+import { TracksComponent } from './pages/tracks/tracks.component';
 
 export const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -54,7 +57,8 @@ const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
     LoginComponent,
     FileInputComponent,
     ValidateIdenticalDirective,
-    LayoutComponent
+    LayoutComponent,
+    TracksComponent
   ],
   imports: [
     BrowserModule,
@@ -64,12 +68,13 @@ const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
     StoreModule.forRoot({
       artists: artistsReducer,
       albums: albumsReducer,
-      users: usersReducer
+      users: usersReducer,
+      tracks: tracksReducer
     }, {metaReducers}),
     MatToolbarModule,
     MatCardModule,
     FlexModule,
-    EffectsModule.forRoot([ArtistsEffects, AlbumsEffects, UsersEffects]),
+    EffectsModule.forRoot([ArtistsEffects, AlbumsEffects, UsersEffects, TracksEffects]),
     MatProgressSpinnerModule,
     MatButtonModule,
     MatFormFieldModule,

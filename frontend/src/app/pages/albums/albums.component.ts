@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/types';
-import { Album } from '../models/album.model';
-import { fetchAlbumsRequest } from '../store/albums.actions';
+import { AppState } from '../../store/types';
+import { Album } from '../../models/album.model';
+import { fetchAlbumsRequest } from '../../store/albums.actions';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -28,9 +28,9 @@ export class AlbumsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(artist => {
-      this.title = artist['title'];
-      this.store.dispatch(fetchAlbumsRequest({artist_id: artist['id']}));
+    this.route.params.subscribe(params => {
+      this.title = params['title'];
+      this.store.dispatch(fetchAlbumsRequest({artist_id: params['id']}));
     })
   }
 }
