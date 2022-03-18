@@ -2,7 +2,11 @@ export class Track {
   constructor(
     public _id: string,
     public title: string,
-    public album: string,
+    public album: {
+      _id: string,
+      title: string,
+      image: string
+    },
     public duration: string,
   ) {}
 }
@@ -10,6 +14,10 @@ export class Track {
 export interface ApiTrackData {
   _id: string,
   title: string,
-  album: string,
+  album: {
+    _id: string,
+    title: string,
+    image: string
+  },
   duration: string,
 }

@@ -1,2 +1,25 @@
-<p *ngFor="let track of tracks | async">{{track.title}} <a href="https://youtube.com">Play song</a></p>
+<div>
+  <mat-card class="example-card" *ngIf="album">
+    <mat-card-title-group>
+      <mat-card-title>{{ album?.title }}</mat-card-title>
+      <img mat-card-xl-image [src]="api + '/uploads/' + album?.image" alt="{{ album?.title }}">
+    </mat-card-title-group>
+  </mat-card>
+
+  <mat-card *ngFor="let track of tracks | async">
+    <div fxLayoutAlign="start center">
+      <div fxFlex="40" fxLayoutAlign="start center">
+        <span class="material-icons" (click)="onListen(track._id)">
+            play_circle_filled
+        </span>
+        <span class="material-icons" *ngIf="slider !== 0 && track._id === idTrack" (click)="onPause()">
+          pause_circle
+        </span>
+        <span class="text"><strong>{{ track.title }}</strong></span>
+        <span class="text">{{ duration }}</span>
+      </div>
+      <mat-slider aria-label="unit(s)" value="{{idTrack === track._id?slider:0}}"></mat-slider>
+    </div>
+  </mat-card>
+</div>
 

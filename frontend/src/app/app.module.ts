@@ -38,6 +38,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { tracksReducer } from './store/tracks.reducer';
 import { TracksEffects } from './store/tracks.effects';
 import { TracksComponent } from './pages/tracks/tracks.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { trackHistoryReducer } from './store/trackHistory.reducer';
+import { TrackHistoryEffects } from './store/trackHistory.effects';
 
 export const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -60,33 +63,37 @@ const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
     LayoutComponent,
     TracksComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    StoreModule.forRoot({
-      artists: artistsReducer,
-      albums: albumsReducer,
-      users: usersReducer,
-      tracks: tracksReducer
-    }, {metaReducers}),
-    MatToolbarModule,
-    MatCardModule,
-    FlexModule,
-    EffectsModule.forRoot([ArtistsEffects, AlbumsEffects, UsersEffects, TracksEffects]),
-    MatProgressSpinnerModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatSnackBarModule,
-    MatProgressBarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatMenuModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        StoreModule.forRoot({
+            artists: artistsReducer,
+            albums: albumsReducer,
+            users: usersReducer,
+            tracks: tracksReducer,
+            trackHistory: trackHistoryReducer
+        }, {metaReducers}),
+        MatToolbarModule,
+        MatCardModule,
+        FlexModule,
+        EffectsModule.forRoot(
+          [ArtistsEffects, AlbumsEffects, UsersEffects, TracksEffects, TrackHistoryEffects]
+        ),
+        MatProgressSpinnerModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatSnackBarModule,
+        MatProgressBarModule,
+        MatSidenavModule,
+        MatListModule,
+        MatIconModule,
+        MatMenuModule,
+        MatSliderModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -36,7 +36,7 @@ router.get('/', async(req, res, next) => {
 
         if(req.query.album){
             query.album = {_id: req.query.album};
-            let tracks = await Track.find(query).populate('album', 'title artist_id');
+            let tracks = await Track.find(query).populate('album', 'title artist_id image');
 
             return res.send(tracks);
         }else{
