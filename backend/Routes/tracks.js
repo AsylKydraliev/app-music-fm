@@ -51,6 +51,7 @@ router.get('/', async(req, res, next) => {
             for(let album of albums){
                 tracksByArtistId = await Track.find({album: {_id: album._id}});
             }
+
             return res.send(tracksByArtistId);
         }
     } catch(error){

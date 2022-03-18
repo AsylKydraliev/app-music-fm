@@ -71,6 +71,7 @@ export class UsersEffects {
           map(() => logoutUser()),
           tap(() => {
             this.snackbar.open('Logout successful', 'OK', {duration: 3000});
+            void this.router.navigate(['/'])
           })
         )
       }

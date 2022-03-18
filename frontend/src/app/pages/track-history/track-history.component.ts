@@ -21,9 +21,9 @@ export class TrackHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.user.subscribe(user => {
-        const token = <string>user?.token;
-        this.store.dispatch(fetchHistoryRequest({token: token}))
-      })
+    this.user.subscribe(user => {
+      const token = <string>user?.token;
+      this.store.dispatch(fetchHistoryRequest({token: token}))
+    })
   }
 }
