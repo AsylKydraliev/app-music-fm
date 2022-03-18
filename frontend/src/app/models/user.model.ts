@@ -3,7 +3,8 @@ export interface User {
   email: string,
   displayName: string,
   avatar: File | null,
-  token: string
+  token: string,
+  role: string
 }
 
 export interface RegisterUser {

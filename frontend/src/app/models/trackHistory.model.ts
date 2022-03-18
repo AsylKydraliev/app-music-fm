@@ -7,7 +7,30 @@ export class TrackHistory {
   ) {}
 }
 
+export class TrackHistoryApi {
+  constructor(
+    public _id: string,
+    public user: string,
+    public track: {
+      _id: string,
+      title: string,
+      album: string
+    },
+    public datetime: string,
+  ) {}
+}
+
 export interface TrackHistoryData {
-  user: string,
   track: string,
+}
+
+export interface TrackHistories {
+  _id: string,
+  user: string,
+  track: {
+    _id: string,
+    title: string,
+    album: string
+  },
+  datetime: string,
 }

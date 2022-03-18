@@ -41,6 +41,8 @@ import { TracksComponent } from './pages/tracks/tracks.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { trackHistoryReducer } from './store/trackHistory.reducer';
 import { TrackHistoryEffects } from './store/trackHistory.effects';
+import { TrackHistoryComponent } from './pages/track-history/track-history.component';
+import { MatTableModule } from '@angular/material/table';
 
 export const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -61,39 +63,41 @@ const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
     FileInputComponent,
     ValidateIdenticalDirective,
     LayoutComponent,
-    TracksComponent
+    TracksComponent,
+    TrackHistoryComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        StoreModule.forRoot({
-            artists: artistsReducer,
-            albums: albumsReducer,
-            users: usersReducer,
-            tracks: tracksReducer,
-            trackHistory: trackHistoryReducer
-        }, {metaReducers}),
-        MatToolbarModule,
-        MatCardModule,
-        FlexModule,
-        EffectsModule.forRoot(
-          [ArtistsEffects, AlbumsEffects, UsersEffects, TracksEffects, TrackHistoryEffects]
-        ),
-        MatProgressSpinnerModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatSnackBarModule,
-        MatProgressBarModule,
-        MatSidenavModule,
-        MatListModule,
-        MatIconModule,
-        MatMenuModule,
-        MatSliderModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    StoreModule.forRoot({
+      artists: artistsReducer,
+      albums: albumsReducer,
+      users: usersReducer,
+      tracks: tracksReducer,
+      trackHistory: trackHistoryReducer
+    }, {metaReducers}),
+    MatToolbarModule,
+    MatCardModule,
+    FlexModule,
+    EffectsModule.forRoot(
+      [ArtistsEffects, AlbumsEffects, UsersEffects, TracksEffects, TrackHistoryEffects]
+    ),
+    MatProgressSpinnerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatMenuModule,
+    MatSliderModule,
+    MatTableModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

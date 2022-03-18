@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
-import { createHistoryFailure, createHistoryRequest, createHistorySuccess } from './trackHistory.actions';
+import {
+  createHistoryFailure,
+  createHistoryRequest,
+  createHistorySuccess, fetchHistoryFailure,
+  fetchHistoryRequest, fetchHistorySuccess
+} from './trackHistory.actions';
 import { TrackHistoryService } from '../services/trackHistory.service';
 
 @Injectable()
@@ -16,6 +21,15 @@ export class TrackHistoryEffects {
       ))
     )
   ))));
+
+  fetchTrackHistory = createEffect(() => this.actions.pipe(
+    ofType(fetchHistoryRequest),
+    mergeMap(({token}) => this.trackHistoryService.getTracksHistories(token).pipe(
+        map(trackHistories => fetchHistorySuccess({trackHistories}),
+          catchError(() => of(fetchHistoryFailure({error: 'Something went wrong'})
+          ))
+        )
+      ))));
 
   constructor(
     private trackHistoryService: TrackHistoryService,

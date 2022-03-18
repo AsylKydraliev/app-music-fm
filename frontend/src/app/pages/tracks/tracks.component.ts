@@ -28,7 +28,6 @@ export class TracksComponent implements OnInit, OnDestroy {
   slider = 0;
   idTrack!: string;
   interval = 0;
-  duration!: string;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     this.tracks = store.select(state => state.tracks.tracks);
@@ -43,7 +42,6 @@ export class TracksComponent implements OnInit, OnDestroy {
     this.tracksSubscription = this.tracks.subscribe((tracks: Track[]) => {
       tracks.forEach(track => {
         this.album = <Album>track.album;
-        this.duration = track.duration;
       })
     })
     this.userSubscription = this.user.subscribe(user => {
@@ -53,23 +51,25 @@ export class TracksComponent implements OnInit, OnDestroy {
 
   onListen(id: string) {
     this.idTrack = id;
-    this.slider = 0;
+    this.playTrack();
 
     const trackHistoryData: TrackHistoryData = {
-      user: this.userData?._id,
       track: this.idTrack,
     }
-    console.log(trackHistoryData)
 
     this.store.dispatch(createHistoryRequest({
       trackHistoryData: trackHistoryData,
       token: this.userData.token
     }));
+  };
+
+  playTrack(){
+    this.slider = 0;
 
     this.interval = setInterval(() => {
-        this.slider++;
+      this.slider++;
     }, 1000)
-  };
+  }
 
   onPause() {
     clearInterval(this.interval);
