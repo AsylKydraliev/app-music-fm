@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Observable } from 'rxjs';
@@ -21,9 +21,9 @@ export class TrackHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user.subscribe(user => {
-      const token = <string>user?.token;
-      this.store.dispatch(fetchHistoryRequest({token: token}))
-    })
+      this.user.subscribe(user => {
+        const token = <string>user?.token;
+        this.store.dispatch(fetchHistoryRequest({token: token}))
+      })
   }
 }
