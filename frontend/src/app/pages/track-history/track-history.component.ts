@@ -4,6 +4,7 @@ import { AppState } from '../../store/types';
 import { Observable, Subscription } from 'rxjs';
 import { TrackHistories } from '../../models/trackHistory.model';
 import { fetchHistoryRequest } from '../../store/trackHistory.actions';
+import { Album } from '../../models/album.model';
 
 @Component({
   selector: 'app-track-history',
@@ -12,10 +13,12 @@ import { fetchHistoryRequest } from '../../store/trackHistory.actions';
 })
 export class TrackHistoryComponent implements OnInit {
   histories: Observable<TrackHistories[]>;
+  albums: Observable<Album[]>;
   userSubscription!: Subscription;
 
   constructor(private store: Store<AppState>) {
     this.histories = store.select(state => state.trackHistory.trackHistories);
+    this.albums = store.select(state => state.albums.albums);
   }
 
   ngOnInit(): void {

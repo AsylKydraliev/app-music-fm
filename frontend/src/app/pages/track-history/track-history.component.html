@@ -1,12 +1,14 @@
 <table class="styled-table">
   <thead>
   <tr>
+    <th>Artist</th>
     <th>Track</th>
     <th>Listening time</th>
   </tr>
   </thead>
   <tbody>
   <tr class="active-row" *ngFor="let history of histories | async">
+    <td>{{history.artist}}</td>
     <td>{{history.track.title}}</td>
     <td>{{history.datetime}}</td>
   </tr>
