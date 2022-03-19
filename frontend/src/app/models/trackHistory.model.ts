@@ -14,7 +14,10 @@ export class TrackHistoryApi {
     public track: {
       _id: string,
       title: string,
-      album: string
+      album: {
+        _id: string,
+        artist: string[]
+      }
     },
     public datetime: string,
   ) {}
@@ -30,7 +33,10 @@ export interface TrackHistories {
   track: {
     _id: string,
     title: string,
-    album: string
+    album: {
+      _id: string,
+      artist: string[],
+    }
   },
   datetime: string,
 }

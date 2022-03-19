@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { TrackHistories } from '../../models/trackHistory.model';
 import { fetchHistoryRequest } from '../../store/trackHistory.actions';
-import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-track-history',
@@ -13,17 +12,13 @@ import { User } from '../../models/user.model';
 })
 export class TrackHistoryComponent implements OnInit {
   histories: Observable<TrackHistories[]>;
-  user: Observable<User | null>;
+  userSubscription!: Subscription;
 
   constructor(private store: Store<AppState>) {
     this.histories = store.select(state => state.trackHistory.trackHistories);
-    this.user = store.select(state => state.users.user);
   }
 
   ngOnInit(): void {
-    this.user.subscribe(user => {
-      const token = <string>user?.token;
-      this.store.dispatch(fetchHistoryRequest({token: token}))
-    })
+    this.store.dispatch(fetchHistoryRequest());
   }
 }

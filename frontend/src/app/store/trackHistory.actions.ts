@@ -6,7 +6,7 @@ export const createHistoryRequest = createAction('[History] Create Request',
 export const createHistorySuccess = createAction('[History] Create Success', props<{trackHistory: TrackHistory}>());
 export const createHistoryFailure = createAction('[History] Create Failure', props<{error: string}>());
 
-export const fetchHistoryRequest = createAction('[History] Fetch Request', props<{token: string}>());
-export const fetchHistorySuccess = createAction('[History] Fetch Success',
+export const fetchHistoryRequest = createAction('[Histories] Fetch Request');
+export const fetchHistorySuccess = createAction('[Histories] Fetch Success',
   props<{trackHistories: TrackHistories[]}>());
-export const fetchHistoryFailure = createAction('[History] Fetch Failure', props<{error: string}>());
+export const fetchHistoryFailure = createAction('[Histories] Fetch Failure', props<{error: string}>());

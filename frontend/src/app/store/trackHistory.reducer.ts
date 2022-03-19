@@ -3,11 +3,11 @@ import { createReducer, on } from '@ngrx/store';
 import {
   createHistoryFailure,
   createHistoryRequest,
-  createHistorySuccess, fetchHistoryFailure,
-  fetchHistoryRequest, fetchHistorySuccess
+  createHistorySuccess,
+  fetchHistoryFailure,
+  fetchHistoryRequest,
+  fetchHistorySuccess
 } from './trackHistory.actions';
-import { fetchTracksRequest } from './tracks.actions';
-import { fetchAlbumsFailure } from './albums.actions';
 
 const initialState: TrackHistoryState = {
   trackHistory: null,
@@ -24,9 +24,9 @@ export const trackHistoryReducer = createReducer(
   on(createHistoryFailure, (state, {error}) => ({...state, createLoading: true, createError: error})),
 
   on(fetchHistoryRequest, state => ({...state, fetchLoading: true})),
-  on(fetchHistorySuccess, (state, {trackHistories}) => ({
-    ...state, fetchLoading: false,
-    trackHistories
-  })),
+  on(fetchHistorySuccess, (state, {trackHistories}) => {
+    return {...state, fetchLoading: false,
+    trackHistories}
+  }),
   on(fetchHistoryFailure, (state, {error}) => ({...state, fetchLoading: true, fetchError: error})),
 )
