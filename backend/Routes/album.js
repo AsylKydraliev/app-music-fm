@@ -34,24 +34,28 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.post('/', authorization, permit('admin'), upload.single('image'), async (req, res, next) => {
+router.post('/', authorization, permit('user', 'admin'), upload.single('image'), async (req, res, next) => {
     try{
         if(!req.body.title || !req.body.artist_id){
             res.status(400).send({error: 'Title and artist id is required'});
         }
 
-        const albumObj = {
+        const album = new Album({
             title: req.body.title,
             artist_id: req.body.artist_id,
             year: req.body.year,
-            image: null
-        };
+            image: null,
+            isPublished: false,
+        });
 
-        if(req.file){
-            albumObj.image = req.file.filename;
+        if(req.user.role === 'admin'){
+            album.isPublished = true;
         }
 
-        const album = new Album(albumObj);
+        if(req.file){
+            album.image = req.file.filename;
+        }
+
         await album.save();
 
         return res.send(album);

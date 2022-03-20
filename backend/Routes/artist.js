@@ -38,23 +38,27 @@ router.delete('/:id', async (req, res, next) => {
     }
 });
 
-router.post('/', authorization, permit('admin'), upload.single('photo'), async (req, res, next) => {
+router.post('/', authorization, permit('user', 'admin'), upload.single('photo'), async (req, res, next) => {
     try{
         if(!req.body.title){
             res.status(400).send({error: 'Title is required'});
         }
 
-        const artistObj = {
+        const artist = new Artist({
             title: req.body.title,
             photo: null,
             info: req.body.info,
-        };
+            isPublished: false,
+        });
 
         if(req.file){
-            artistObj.photo = req.file.filename;
+            artist.photo = req.file.filename;
         }
 
-        const artist = new Artist(artistObj);
+        if(req.user.role === 'admin'){
+            artist.isPublished = true;
+        }
+
         await artist.save();
 
         return res.send(artist);

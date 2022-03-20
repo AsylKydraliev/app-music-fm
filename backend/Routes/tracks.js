@@ -8,7 +8,7 @@ const permit = require("../middleware/permit");
 
 const router = express.Router();
 
-router.post('/', authorization, permit('admin'), async(req, res, next) => {
+router.post('/', authorization, permit('user', 'admin'), async(req, res, next) => {
    try{
        if(!req.body.title || !req.body.album || !req.body.duration){
            return res.status(400).send({error: 'Something went wrong'});
@@ -18,7 +18,12 @@ router.post('/', authorization, permit('admin'), async(req, res, next) => {
            title: req.body.title,
            album: req.body.album,
            duration: req.body.duration,
+           isPublished: false,
        });
+
+       if(req.user.role === 'admin'){
+           track.isPublished = true;
+       }
 
        await track.save();
         res.send(track);
