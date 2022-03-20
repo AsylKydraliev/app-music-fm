@@ -36,7 +36,7 @@ export class AlbumsEffects {
           void this.router.navigate(['/']);
         }),
         catchError(() => of(createAlbumFailure({
-          error: 'Something went wrong'
+          error: 'You need to register to add an album!'
         })))
       )
     )));

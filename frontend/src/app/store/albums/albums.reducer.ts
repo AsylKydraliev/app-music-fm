@@ -24,5 +24,5 @@ export const albumsReducer = createReducer(
 
   on(createAlbumRequest, state => ({...state, createLoading: true})),
   on(createAlbumSuccess, state => ({...state, createLoading: false})),
-  on(createAlbumFailure, (state, {error}) => ({...state, createLoading: true, createError: error})),
+  on(createAlbumFailure, (state, {error}) => ({...state, createLoading: false, createError: error})),
 )

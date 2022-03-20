@@ -37,7 +37,6 @@ router.post('/', authorization, permit('user', 'admin'), async(req, res, next) =
 router.get('/', async(req, res, next) => {
     try{
         const query = {};
-        let tracksByArtistId = [];
 
         if(req.query.album){
             query.album = {_id: req.query.album};
@@ -46,8 +45,11 @@ router.get('/', async(req, res, next) => {
             return res.send(tracks);
         }else{
             const allTracks = await Track.find();
+
             return res.send(allTracks);
         }
+
+        let tracksByArtistId = [];
 
         if(req.query.artist_id){
             const albums = await Album.find({artist_id: {_id: req.query.artist_id}});

@@ -31,17 +31,16 @@
         <mat-label>Image</mat-label>
         <app-file-input name="image" ngModel></app-file-input>
       </mat-form-field>
-      <div>
-        <ng-template #btn>
-          <button
-            type="submit"
-            mat-raised-button
-            color="primary"
-            [disabled]="f.invalid"
-          >SAVE</button>
-        </ng-template>
-        <mat-progress-bar mode="indeterminate" *ngIf="(loading | async) else btn"></mat-progress-bar>
-      </div>
+      <ng-template #btn>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="f.invalid"
+        >SAVE
+        </button>
+      </ng-template>
+      <mat-progress-bar mode="indeterminate" *ngIf="(loading | async) else btn"></mat-progress-bar>
     </form>
   </mat-card-content>
 </mat-card>

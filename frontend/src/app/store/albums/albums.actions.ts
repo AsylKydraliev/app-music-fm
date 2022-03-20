@@ -7,4 +7,4 @@ export const fetchAlbumsFailure = createAction('[Albums] Fetch Failure', props<{
 
 export const createAlbumRequest = createAction('[Album] Create Request', props<{albumData: AlbumData}>());
 export const createAlbumSuccess = createAction('[Album] Create Success');
-export const createAlbumFailure = createAction('[Album] Create Failure', props<{error: string}>());
+export const createAlbumFailure = createAction('[Album] Create Failure', props<{error: string | null}>());

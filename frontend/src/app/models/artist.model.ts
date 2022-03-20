@@ -3,12 +3,13 @@ export class Artist {
     public _id: string,
     public title: string,
     public photo: string,
-    public info: string
+    public info: string,
+    public isPublished: boolean,
   ) {}
 }
 
 export interface ArtistData {
-  _id: string,
+  [key: string]: any,
   title: string,
   photo: File | null,
   info: string,
@@ -19,4 +20,5 @@ export interface ApiArtistData {
   title: string,
   photo: string,
   info: string,
+  isPublished: boolean,
 }

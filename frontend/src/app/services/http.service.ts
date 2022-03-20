@@ -22,6 +22,7 @@ export class HttpService{
             artists.title,
             artists.photo,
             artists.info,
+            artists.isPublished,
           )
         })
       }
@@ -37,7 +38,8 @@ export class HttpService{
               albums.title,
               albums.artist_id,
               albums.year,
-              albums.image
+              albums.image,
+              albums.isPublished,
             )
           })
         }
