@@ -39,7 +39,8 @@ export class AlbumsEffects {
           error: 'You need to register to add an album!'
         })))
       )
-    )));
+    ))
+  );
 
   constructor(
     private albumsService: AlbumsService,

@@ -8,7 +8,14 @@ export class Track {
       image: string
     },
     public duration: string,
+    public isPublished: boolean,
   ) {}
+}
+
+export interface TrackData {
+  title: string,
+  album: string,
+  duration: string,
 }
 
 export interface ApiTrackData {
@@ -20,4 +27,5 @@ export interface ApiTrackData {
     image: string
   },
   duration: string,
+  isPublished: boolean,
 }

@@ -45,7 +45,7 @@
       <mat-icon class="register">account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>{{ (user | async)?.displayName }}</button>
+      <button mat-menu-item disabled>{{ (user | async)?.email }}</button>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   </nav>
