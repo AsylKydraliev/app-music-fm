@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Observable, Subscription } from 'rxjs';
 import { Track } from '../../models/track.model';
-import { fetchTracksRequest } from '../../store/tracks.actions';
+import { fetchTracksRequest } from '../../store/tracks/tracks.actions';
 import { ActivatedRoute } from '@angular/router';
 import { Album } from '../../models/album.model';
 import { environment } from '../../../environments/environment';
-import { createHistoryRequest } from '../../store/trackHistory.actions';
+import { createHistoryRequest } from '../../store/trackHistory/trackHistory.actions';
 import { TrackHistoryData } from '../../models/trackHistory.model';
 
 @Component({

@@ -48,7 +48,6 @@ router.post('/', authorization, permit('user', 'admin'), upload.single('photo'),
             title: req.body.title,
             photo: null,
             info: req.body.info,
-            isPublished: false,
         });
 
         if(req.file){

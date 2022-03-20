@@ -13,7 +13,9 @@ export type ArtistsState = {
 export type AlbumsState = {
   albums: Album[],
   fetchLoading: boolean,
-  fetchError: null | string
+  fetchError: null | string,
+  createLoading: boolean,
+  createError: null | string,
 };
 
 export type UserState = {

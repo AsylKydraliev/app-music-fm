@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Track } from '../models/track.model';
+import { Track } from '../../models/track.model';
 
 export const fetchTracksRequest = createAction('[Tracks] Fetch Request', props<{album: string}>());
 export const fetchTracksSuccess = createAction('[Tracks] Fetch Success', props<{tracks: Track[]}>());

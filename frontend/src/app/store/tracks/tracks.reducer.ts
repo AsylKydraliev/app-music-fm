@@ -1,4 +1,4 @@
-import { TracksState } from './types';
+import { TracksState } from '../types';
 import { createReducer, on } from '@ngrx/store';
 import { fetchTracksFailure, fetchTracksRequest, fetchTracksSuccess } from './tracks.actions';
 

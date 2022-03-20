@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { fetchTracksFailure, fetchTracksRequest, fetchTracksSuccess } from './tracks.actions';
-import { TracksService } from '../services/tracks.service';
+import { TracksService } from '../../services/tracks.service';
 
 @Injectable()
 

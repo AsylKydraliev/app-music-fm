@@ -9,7 +9,7 @@ import {
   fetchHistoryRequest,
   fetchHistorySuccess
 } from './trackHistory.actions';
-import { TrackHistoryService } from '../services/trackHistory.service';
+import { TrackHistoryService } from '../../services/trackHistory.service';
 
 @Injectable()
 
@@ -27,9 +27,9 @@ export class TrackHistoryEffects {
   fetchTrackHistory = createEffect(() => this.actions.pipe(
     ofType(fetchHistoryRequest),
     mergeMap(() => this.trackHistoryService.getTracksHistories().pipe(
-          map(trackHistories => fetchHistorySuccess({trackHistories})),
-          catchError(() => of(fetchHistoryFailure({error: 'Something went wrong'})
-        )))
+      map(trackHistories => fetchHistorySuccess({trackHistories})),
+      catchError(() => of(fetchHistoryFailure({error: 'Something went wrong'})
+      )))
     )))
 
   constructor(

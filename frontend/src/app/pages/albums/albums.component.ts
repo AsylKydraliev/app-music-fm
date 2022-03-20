@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Album } from '../../models/album.model';
-import { fetchAlbumsRequest } from '../../store/albums.actions';
+import { fetchAlbumsRequest } from '../../store/albums/albums.actions';
 import { ActivatedRoute } from '@angular/router';
 
 

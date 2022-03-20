@@ -45,7 +45,6 @@ router.post('/', authorization, permit('user', 'admin'), upload.single('image'),
             artist_id: req.body.artist_id,
             year: req.body.year,
             image: null,
-            isPublished: false,
         });
 
         if(req.user.role === 'admin'){

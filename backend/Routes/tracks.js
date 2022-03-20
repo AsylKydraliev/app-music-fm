@@ -18,7 +18,6 @@ router.post('/', authorization, permit('user', 'admin'), async(req, res, next) =
            title: req.body.title,
            album: req.body.album,
            duration: req.body.duration,
-           isPublished: false,
        });
 
        if(req.user.role === 'admin'){
@@ -38,6 +37,7 @@ router.post('/', authorization, permit('user', 'admin'), async(req, res, next) =
 router.get('/', async(req, res, next) => {
     try{
         const query = {};
+        let tracksByArtistId = [];
 
         if(req.query.album){
             query.album = {_id: req.query.album};
@@ -50,7 +50,6 @@ router.get('/', async(req, res, next) => {
         }
 
         if(req.query.artist_id){
-            let tracksByArtistId = [];
             const albums = await Album.find({artist_id: {_id: req.query.artist_id}});
 
             for(let album of albums){

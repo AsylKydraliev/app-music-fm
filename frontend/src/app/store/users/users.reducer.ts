@@ -1,4 +1,4 @@
-import { UserState } from './types';
+import { UserState } from '../types';
 import { createReducer, on } from '@ngrx/store';
 import {
   loginUsersFailure,

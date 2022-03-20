@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
-import { artistsReducer } from './store/artists.reducer';
-import { albumsReducer } from './store/albums.reducer';
-import { usersReducer } from './store/users.reducer';
-import { tracksReducer } from './store/tracks.reducer';
-import { trackHistoryReducer } from './store/trackHistory.reducer';
+import { artistsReducer } from './store/artists/artists.reducer';
+import { albumsReducer } from './store/albums/albums.reducer';
+import { usersReducer } from './store/users/users.reducer';
+import { tracksReducer } from './store/tracks/tracks.reducer';
+import { trackHistoryReducer } from './store/trackHistory/trackHistory.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { ArtistsEffects } from './store/artists.effects';
-import { AlbumsEffects } from './store/albums.effects';
-import { UsersEffects } from './store/users.effects';
-import { TracksEffects } from './store/tracks.effects';
-import { TrackHistoryEffects } from './store/trackHistory.effects';
+import { ArtistsEffects } from './store/artists/artists.effects';
+import { AlbumsEffects } from './store/albums/albums.effects';
+import { UsersEffects } from './store/users/users.effects';
+import { TracksEffects } from './store/tracks/tracks.effects';
+import { TrackHistoryEffects } from './store/trackHistory/trackHistory.effects';
 
 export const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({

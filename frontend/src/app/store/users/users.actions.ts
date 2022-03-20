@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { LoginError, LoginUserData, RegisterError, RegisterUser, User } from '../models/user.model';
+import { LoginError, LoginUserData, RegisterError, RegisterUser, User } from '../../models/user.model';
 
 export const registerUserRequest = createAction('[Users] Register Request', props<{users: RegisterUser}>());
 export const registerUserSuccess = createAction('[Users] Register Success', props<{user: User}>());

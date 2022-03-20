@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Observable, Subscription } from 'rxjs';
 import { TrackHistories } from '../../models/trackHistory.model';
-import { fetchHistoryRequest } from '../../store/trackHistory.actions';
+import { fetchHistoryRequest } from '../../store/trackHistory/trackHistory.actions';
 import { Album } from '../../models/album.model';
 
 @Component({

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { LoginError, LoginUserData } from '../../models/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
-import { loginUsersRequest } from '../../store/users.actions';
+import { loginUsersRequest } from '../../store/users/users.actions';
 
 // import { LoginUserData } from '../models/user.model';
 

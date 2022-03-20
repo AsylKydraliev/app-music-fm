@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Observable } from 'rxjs';
-import { fetchArtistsRequest } from '../../store/artists.actions';
+import { fetchArtistsRequest } from '../../store/artists/artists.actions';
 
 @Component({
   selector: 'app-artists',

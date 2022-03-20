@@ -1,4 +1,4 @@
-import { TrackHistoryState } from './types';
+import { TrackHistoryState } from '../types';
 import { createReducer, on } from '@ngrx/store';
 import {
   createHistoryFailure,

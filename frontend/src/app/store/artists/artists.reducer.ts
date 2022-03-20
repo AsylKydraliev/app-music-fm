@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { fetchArtistsFailure, fetchArtistsRequest, fetchArtistsSuccess } from './artists.actions';
-import { ArtistsState } from './types';
+import { ArtistsState } from '../types';
 
 const initialState: ArtistsState = {
   artists: [],

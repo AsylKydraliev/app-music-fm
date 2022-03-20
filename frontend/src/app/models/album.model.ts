@@ -12,12 +12,9 @@ export class Album {
 }
 
 export interface AlbumData {
-  _id: string,
+  [key: string]: any,
   title: string,
-  artist_id: {
-    _id: string,
-    title: string
-  },
+  artist_id: string,
   year: string,
   image: File | null,
 }

@@ -1,8 +1,7 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { UsersService } from '../services/users.service';
+import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   loginUsersFailure,
   loginUsersRequest,
@@ -13,8 +12,8 @@ import {
   registerUserRequest,
   registerUserSuccess
 } from './users.actions';
-import { catchError, map, mergeMap, of, tap } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { map, mergeMap, tap } from 'rxjs';
+import { HelpersService } from '../../services/helpers.service';
 
 @Injectable()
 export class UsersEffects {
@@ -23,20 +22,10 @@ export class UsersEffects {
     mergeMap(({users}) => this.usersService.registerUser(users).pipe(
       map(user => registerUserSuccess({user})),
       tap(() => {
-        this.snackbar.open('Register successful', 'OK', {duration: 3000});
+        this.helpers.openSnackbar('Register successful');
         void this.router.navigate(['/']);
       }),
-      catchError(requestError => {
-        let registerError = null;
-
-        if(requestError instanceof HttpErrorResponse && requestError.status === 400) {
-          registerError = requestError.error;
-        }else{
-          this.snackbar.open('Server error', 'OK', {duration: 3000});
-        }
-
-        return of(registerUserFailure({error: registerError}));
-      })
+      this.helpers.catchServerError(registerUserFailure)
     ))
   ))
 
@@ -45,20 +34,10 @@ export class UsersEffects {
     mergeMap(({userData}) => this.usersService.loginUser(userData).pipe(
       map(user => loginUsersSuccess({user})),
       tap(() => {
-        this.snackbar.open('Login successful', 'OK', {duration: 3000});
+        this.helpers.openSnackbar('Login successful');
         void this.router.navigate(['/']);
       }),
-      catchError(requestError => {
-        let loginError = null;
-
-        if(requestError instanceof HttpErrorResponse && requestError.status === 400) {
-          loginError = requestError.error;
-        }else{
-          this.snackbar.open('Server error', 'OK', {duration: 3000});
-        }
-
-        return of(loginUsersFailure({error: loginError}));
-      })
+      this.helpers.catchServerError(loginUsersFailure)
     ))
   ))
 
@@ -68,7 +47,7 @@ export class UsersEffects {
       map(() => logoutUser()),
       tap(() => {
         void this.router.navigate(['/']);
-        this.snackbar.open('Logout successful', 'OK', {duration: 3000});
+        this.helpers.openSnackbar('Logout successful');
       })
     ))
   ))
@@ -77,6 +56,6 @@ export class UsersEffects {
     private actions: Actions,
     private usersService: UsersService,
     private router: Router,
-    private snackbar: MatSnackBar,
+    private helpers: HelpersService
   ) {}
 }
