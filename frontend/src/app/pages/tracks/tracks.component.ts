@@ -7,7 +7,6 @@ import { fetchTracksRequest } from '../../store/tracks.actions';
 import { ActivatedRoute } from '@angular/router';
 import { Album } from '../../models/album.model';
 import { environment } from '../../../environments/environment';
-import { User } from '../../models/user.model';
 import { createHistoryRequest } from '../../store/trackHistory.actions';
 import { TrackHistoryData } from '../../models/trackHistory.model';
 
@@ -22,16 +21,12 @@ export class TracksComponent implements OnInit, OnDestroy {
   album!: Album;
   api = environment.apiUrl;
   tracksSubscription!: Subscription;
-  userSubscription!: Subscription;
-  user: Observable<null | User>;
-  userData!: User;
   slider = 0;
   idTrack!: string;
   interval = 0;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     this.tracks = store.select(state => state.tracks.tracks);
-    this.user = store.select(state => state.users.user);
     this.loading = store.select(state => state.tracks.fetchLoading);
   }
 
@@ -44,9 +39,6 @@ export class TracksComponent implements OnInit, OnDestroy {
         this.album = <Album>track.album;
       })
     })
-    this.userSubscription = this.user.subscribe(user => {
-      this.userData = <User>user;
-    })
   }
 
   onListen(id: string) {
@@ -57,10 +49,7 @@ export class TracksComponent implements OnInit, OnDestroy {
       track: this.idTrack,
     }
 
-    this.store.dispatch(createHistoryRequest({
-      trackHistoryData: trackHistoryData,
-      token: this.userData.token
-    }));
+    this.store.dispatch(createHistoryRequest({trackHistoryData: trackHistoryData}));
   };
 
   playTrack(){
@@ -77,7 +66,6 @@ export class TracksComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.tracksSubscription.unsubscribe();
-    this.userSubscription.unsubscribe();
   }
 }
 

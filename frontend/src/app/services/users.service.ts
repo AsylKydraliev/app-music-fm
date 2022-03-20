@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LoginUserData, RegisterUser, User } from '../models/user.model';
 import { environment } from '../../environments/environment';
 
@@ -27,9 +27,7 @@ export class UsersService {
     return this.http.post<User>(environment.apiUrl + '/users/sessions', userData);
   }
 
-  logoutUser(token: string){
-    return this.http.delete(environment.apiUrl + '/users/sessions', {
-      headers: new HttpHeaders({'Authorization': token})
-    });
+  logoutUser(){
+    return this.http.delete(environment.apiUrl + '/users/sessions');
   }
 }
