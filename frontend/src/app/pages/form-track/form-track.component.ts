@@ -35,7 +35,12 @@ export class FormTrackComponent implements OnInit {
   }
 
   onSubmit() {
-    const trackData: TrackData = this.form.value;
+    const trackData: TrackData = {
+      title: this.form.value.title,
+      album: this.form.value.album,
+      duration: this.form.value.duration,
+    };
+
     this.store.dispatch(createTrackRequest({trackData: trackData}))
   }
 
