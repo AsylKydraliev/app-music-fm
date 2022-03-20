@@ -32,6 +32,10 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from './auth.interceptor';
+import { FormArtistComponent } from './pages/form-artist/form-artist.component';
+import { FormAlbumComponent } from './pages/form-album/form-album.component';
+import { FormTrackComponent } from './pages/form-track/form-track.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -45,7 +49,10 @@ import { AuthInterceptor } from './auth.interceptor';
     ValidateIdenticalDirective,
     LayoutComponent,
     TracksComponent,
-    TrackHistoryComponent
+    TrackHistoryComponent,
+    FormArtistComponent,
+    FormAlbumComponent,
+    FormTrackComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +75,8 @@ import { AuthInterceptor } from './auth.interceptor';
     MatSliderModule,
     MatTableModule,
     AppRoutingModule,
-    AppStoreModule
+    AppStoreModule,
+    MatSelectModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
