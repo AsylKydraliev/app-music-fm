@@ -37,6 +37,7 @@ import { FormAlbumComponent } from './pages/form-album/form-album.component';
 import { FormTrackComponent } from './pages/form-track/form-track.component';
 import { MatSelectModule } from '@angular/material/select';
 import { HasRolesDirective } from './directives/has-roles.directive';
+import { RolesDirective } from './directives/roles.directive';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { HasRolesDirective } from './directives/has-roles.directive';
     FormArtistComponent,
     FormAlbumComponent,
     FormTrackComponent,
-    HasRolesDirective
+    HasRolesDirective,
+    RolesDirective
   ],
   imports: [
     BrowserModule,
