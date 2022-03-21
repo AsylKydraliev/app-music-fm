@@ -12,19 +12,26 @@
       [routerLink]="[artist._id,artist.title, 'artistAlbums']"
       *ngFor="let artist of artists | async"
       fxLayout="column" fxLayoutAlign="space-between"
-    ><mat-card-title-group>
-      <mat-card-title fxLayoutAlign="center center">
+    >
+      <mat-card-title-group>
+        <mat-card-title fxLayoutAlign="center center">
         <span class="material-icons">
           library_music
         </span>
-        {{ artist.title }}
-      </mat-card-title>
-      <mat-card-content mat-card-avatar>
-        <img
-          [src]="api + '/uploads/' + artist.photo"
-          [alt]="artist.title">
-      </mat-card-content>
-    </mat-card-title-group>
+          {{ artist.title }}
+        </mat-card-title>
+        <mat-card-content>
+          <img
+            mat-card-md-image
+            [src]="api + '/uploads/' + artist.photo"
+            [alt]="artist.title">
+        </mat-card-content>
+      </mat-card-title-group>
+<!--      <span class="material-icons" *appHasRoles="['admin']">delete</span>-->
+      <div>
+        <a mat-raised-button>{{ (artist.isPublished === false) ? 'Not published' : ''}}</a>&nbsp;
+        <a mat-raised-button>{{ (artist.isPublished === false) ? 'Publish' : ''}}</a>
+      </div>
     </mat-card>
   </div>
 </ng-template>

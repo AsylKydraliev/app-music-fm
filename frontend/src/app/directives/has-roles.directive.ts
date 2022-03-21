@@ -11,7 +11,10 @@ export class HasRolesDirective implements OnInit, OnDestroy{
   user: Observable<User | null>;
   userSub!: Subscription;
 
-  @Input('appHasRoles') roles!: string[];
+  @Input('appHasRoles') roles!: {
+    role: string[],
+    published?: boolean,
+  };
 
   constructor(
     private templateRef: TemplateRef<any>,
@@ -23,10 +26,12 @@ export class HasRolesDirective implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.userSub = this.user.subscribe(user => {
-      if(user && this.roles.includes(user.role)){
+      this.viewContainer.clear();
+
+      if(user?.role === 'admin'){
         this.viewContainer.createEmbeddedView(this.templateRef);
-      }else{
-        this.viewContainer.clear();
+      } else if((user?.role === 'user' && this.roles.published === true) || (!user && this.roles.published === true)){
+          this.viewContainer.createEmbeddedView(this.templateRef);
       }
     })
   }

@@ -6,6 +6,7 @@ import { AppState } from '../../store/types';
 import { Album } from '../../models/album.model';
 import { fetchAlbumsRequest } from '../../store/albums/albums.actions';
 import { ActivatedRoute } from '@angular/router';
+import { User } from '../../models/user.model';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 
 export class AlbumsComponent implements OnInit {
   albums: Observable<Album[]>;
+  user: Observable<User | null>;
   loading: Observable<boolean>;
   error: Observable<null | string>;
   api = environment.apiUrl;
@@ -25,6 +27,7 @@ export class AlbumsComponent implements OnInit {
     this.albums = store.select(state => state.albums.albums);
     this.loading = store.select(state => state.albums.fetchLoading);
     this.error = store.select(state => state.albums.fetchError);
+    this.user = store.select(state => state.users.user);
   }
 
   ngOnInit(): void {
