@@ -35,90 +35,127 @@ const run = async () => {
         title: 'TheWeekend',
         photo: 'weekend.jpeg',
         info: 'The best artist 2020!',
+        isPublish: false,
     }, {
         title: 'KanyeWest',
         photo: 'west.jpg',
-        info: 'Top performer 2021!'
+        info: 'Top performer 2021!',
+        isPublish: true,
     }, {
         title: 'Drake',
         photo: 'drake.jpg',
-        info: 'Amazing performer 2022!'
+        info: 'Amazing performer 2022!',
+        isPublish: true,
     });
 
-    const [Long, Fourth, Songs] = await Album.create({
+    const [Long, Fourth, Songs, Never, New, Some] = await Album.create({
             title: 'Long story short',
             artist_id: TheWeekend,
             year: '2020',
             image: 'album.jpeg',
+            isPublish: true,
         }, {
             title: 'Fourth dimension',
             artist_id: KanyeWest,
             year: '2021',
             image: 'album.jpeg',
+            isPublish: true,
         }, {
             title: 'Songs for two',
             artist_id: Drake,
             year: '2022',
             image: 'album.jpeg',
-        },
+            isPublish: true,
+        },{
+            title: 'Never give up',
+            artist_id: TheWeekend,
+            year: '2022',
+            image: 'album.jpeg',
+            isPublish: false,
+        },{
+            title: 'New Album 2022',
+            artist_id: KanyeWest,
+            year: '2022',
+            image: 'album.jpeg',
+            isPublish: false,
+        },{
+            title: 'Some Album 2021',
+            artist_id: Drake,
+            year: '2021',
+            image: 'album.jpeg',
+            isPublish: false,
+        }
     );
 
     await Track.create({
             title: 'Commercial brake',
             album: Long,
             duration: '3:16',
+            isPublish: true,
         }, {
             title: 'New song',
             album: Fourth,
             duration: '3:20',
+            isPublish: true,
         }, {
             title: 'For two song',
             album: Songs,
             duration: '3:21',
+            isPublish: true,
         }, {
             title: 'Song for new year',
-            album: Long,
+            album: Never,
             duration: '3:16',
         }, {
             title: 'Song for summer',
-            album: Long,
+            album: Never,
             duration: '3:16',
+            isPublish: true,
         }, {
             title: 'Song for autumn',
             album: Long,
             duration: '3:16',
+            isPublish: true,
         }, {
             title: 'Song for winter Fourth',
             album: Fourth,
             duration: '3:20',
+            isPublish: true,
         },{
             title: 'Song for new year Fourth',
-            album: Fourth,
+            album: New,
             duration: '3:20',
+            isPublish: true,
         }, {
             title: 'Song for summer Fourth',
-            album: Fourth,
+            album: New,
             duration: '3:20',
+            isPublish: true,
         }, {
             title: 'Song for autumn Fourth',
             album: Fourth,
             duration: '3:20',
+            isPublish: false,
         }, {
             title: 'For two song Songs',
             album: Songs,
             duration: '3:21',
+            isPublish: false,
         },{
             title: 'For child song Songs',
             album: Songs,
             duration: '3:21',
+            isPublish: true,
         },{
             title: 'For new year song Songs',
-            album: Songs,
+            album: Some,
             duration: '3:21',
+            isPublish: false,
         },{
             title: 'For five song Songs',
-            album: Songs,
+            album: Some,
             duration: '3:21',
+            isPublish: true,
         },
     );
 

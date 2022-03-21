@@ -15,6 +15,7 @@ const AlbumSchema = new Schema({
     image: String,
     isPublished: {
         type: Boolean,
+        required: true,
         default: false,
     }
 });
