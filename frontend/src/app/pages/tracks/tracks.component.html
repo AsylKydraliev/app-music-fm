@@ -23,9 +23,9 @@
         <span class="text">{{track.duration }}</span>
       </div>
       <mat-slider aria-label="unit(s)" value="{{idTrack === track._id?slider:0}}"></mat-slider>
-<!--      <span class="material-icons" *appHasRoles="['admin']">-->
-<!--        delete_forever-->
-<!--      </span>-->
+      <span class="material-icons" *appRoles="['admin']">
+        delete_forever
+      </span>
     </div>
     <div>
       <a mat-raised-button>{{ (track.isPublished === false) ? 'Not published': ''}}</a>&nbsp;

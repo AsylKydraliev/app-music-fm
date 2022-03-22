@@ -26,8 +26,8 @@
             [src]="api + '/uploads/' + artist.photo"
             [alt]="artist.title">
         </mat-card-content>
+        <span class="material-icons" *appRoles="['admin']">delete</span>
       </mat-card-title-group>
-<!--      <span class="material-icons" *appHasRoles="['admin']">delete</span>-->
       <div>
         <a mat-raised-button>{{ (artist.isPublished === false) ? 'Not published' : ''}}</a>&nbsp;
         <a mat-raised-button>{{ (artist.isPublished === false) ? 'Publish' : ''}}</a>
