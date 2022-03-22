@@ -46,8 +46,8 @@ export class UsersEffects {
     mergeMap(() => this.usersService.logoutUser().pipe(
       map(() => logoutUser()),
       tap(() => {
-        void this.router.navigate(['/']);
         this.helpers.openSnackbar('Logout successful');
+        void this.router.navigate(['/']);
       })
     ))
   ))

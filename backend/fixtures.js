@@ -91,7 +91,7 @@ const run = async () => {
             title: 'Commercial brake',
             album: Long,
             duration: '3:16',
-            isPublished: true,
+            isPublished: false,
         }, {
             title: 'New song',
             album: Fourth,

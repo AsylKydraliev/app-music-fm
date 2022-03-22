@@ -14,28 +14,30 @@
     </mat-card-title-group>
   </mat-card>
 
-  <mat-card *ngFor="let track of tracks | async">
-    <div fxLayoutAlign="start center">
-      <div fxFlex="40" fxLayoutAlign="start center">
+  <div *ngFor="let track of tracks | async">
+    <mat-card *appHasRoles="{role: ['user', 'admin'], published: track.isPublished}">
+      <div fxLayoutAlign="start center">
+        <div fxFlex="40" fxLayoutAlign="start center">
         <span class="material-icons" (click)="onListen(track._id)">
             play_circle_filled
         </span>
-        <span class="material-icons" *ngIf="slider !== 0 && track._id === idTrack" (click)="onPause()">
+          <span class="material-icons" *ngIf="slider !== 0 && track._id === idTrack" (click)="onPause()">
           pause_circle
         </span>
-        <span class="text"><strong>{{ track.title }}</strong></span>
-        <span class="text">{{track.duration }}</span>
+          <span class="text"><strong>{{ track.title }}</strong></span>
+          <span class="text">{{track.duration }}</span>
+        </div>
+        <mat-slider aria-label="unit(s)" value="{{idTrack === track._id?slider:0}}"></mat-slider>
+        <span class="material-icons" *appRoles="['admin']" (click)="onRemove(track._id)">
+          delete_forever
+        </span>
       </div>
-      <mat-slider aria-label="unit(s)" value="{{idTrack === track._id?slider:0}}"></mat-slider>
-      <span class="material-icons" *appRoles="['admin']" (click)="onRemove(track._id)">
-        delete_forever
-      </span>
-    </div>
-    <div>
-      <a mat-button disabled>{{ (track.isPublished === false) ? 'Not published': ''}}</a>&nbsp;
-      <a mat-raised-button (click)="onPublish(track._id)"
-      >{{ (track.isPublished === false) ? 'Publish': ''}}</a>
-    </div>
-  </mat-card>
+      <div>
+        <a mat-button disabled>{{ (track.isPublished === false) ? 'Not published': ''}}</a>&nbsp;
+        <a mat-raised-button (click)="onPublish(track._id)"
+        >{{ (track.isPublished === false) ? 'Publish': ''}}</a>
+      </div>
+    </mat-card>
+  </div>
 </ng-template>
 

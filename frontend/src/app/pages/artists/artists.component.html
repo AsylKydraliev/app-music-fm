@@ -7,10 +7,11 @@
 ></mat-progress-spinner>
 
 <ng-template #artistsArea>
-  <div class="content" fxLayout="column">
+  <div class="content" fxLayout="column"
+       [routerLink]="[artist._id,artist.title, 'artistAlbums']"
+       *ngFor="let artist of artists | async">
     <mat-card
-      [routerLink]="[artist._id,artist.title, 'artistAlbums']"
-      *ngFor="let artist of artists | async"
+      *appHasRoles="{role: ['user', 'admin'], published: artist.isPublished}"
       fxLayout="column" fxLayoutAlign="space-between"
     >
       <mat-card-title-group>

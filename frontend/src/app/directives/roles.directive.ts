@@ -8,7 +8,7 @@ import { Observable, Subscription } from 'rxjs';
   selector: '[appRoles]'
 })
 export class RolesDirective implements OnInit, OnDestroy{
-  user: Observable<null | User>;
+  user: Observable<User | null>;
   userSub!: Subscription;
 
   @Input('appRoles') roles!: string[];
@@ -32,7 +32,8 @@ export class RolesDirective implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    this.userSub.unsubscribe();
+    if(this.userSub){
+      this.userSub.unsubscribe();
+    }
   }
-
 }
