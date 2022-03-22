@@ -15,6 +15,10 @@ export interface ArtistData {
   info: string,
 }
 
+export interface ArtistPublish {
+  isPublished: boolean,
+}
+
 export interface ApiArtistData {
   _id: string,
   title: string,

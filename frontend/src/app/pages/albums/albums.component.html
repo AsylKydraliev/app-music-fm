@@ -10,10 +10,6 @@
   *ngIf="loading | async else albumsArea" mode="indeterminate"
 ></mat-progress-spinner>
 
-<!--*ngIf="!(user | async) && album.isPublished? true :  false ||-->
-<!--((user | async)?.role === 'user') &&-->
-<!--album.isPublished ? true :  false || ((user | async)?.role === 'admin')"-->
-
 <ng-template #albumsArea>
   <div class="content" fxLayout="row wrap">
     <div *ngFor="let album of albums | async">
@@ -21,7 +17,8 @@
         <div>
           <div fxLayoutAlign="space-between">
             <a mat-button>{{ (album.isPublished === false) ? 'Not published': ''}}</a>
-            <a mat-button>{{ (album.isPublished === false) ? 'Publish': ''}}</a>
+            <a mat-button (click)="onPublish(album._id)"
+            >{{ (album.isPublished === false) ? 'Publish': ''}}</a>
           </div>
           <img
             mat-card-image

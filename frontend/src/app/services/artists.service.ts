@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { ApiArtistData, ArtistData } from '../models/artist.model';
+import { ApiArtistData, ArtistData, ArtistPublish } from '../models/artist.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,9 @@ export class ArtistsService {
       }
     });
     return this.http.post<ApiArtistData>(environment.apiUrl + `/artists`, formData);
+  }
+
+  publishArtist(artistPublish: ArtistPublish, id: string){
+    return this.http.post(environment.apiUrl + `/artists/${id}/publish`, artistPublish);
   }
 }

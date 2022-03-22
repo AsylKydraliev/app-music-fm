@@ -40,12 +40,12 @@ const run = async () => {
         title: 'KanyeWest',
         photo: 'west.jpg',
         info: 'Top performer 2021!',
-        isPublished: true,
+        isPublished: false,
     }, {
         title: 'Drake',
         photo: 'drake.jpg',
         info: 'Amazing performer 2022!',
-        isPublished: true,
+        isPublished: false,
     });
 
     const [Long, Fourth, Songs, Never, New, Some] = await Album.create({
@@ -53,19 +53,19 @@ const run = async () => {
             artist_id: TheWeekend,
             year: '2020',
             image: 'album.jpeg',
-            isPublished: true,
+            isPublished: false,
         }, {
             title: 'Fourth dimension',
             artist_id: KanyeWest,
             year: '2021',
             image: 'album.jpeg',
-            isPublished: true,
+            isPublished: false,
         }, {
             title: 'Songs for two',
             artist_id: Drake,
             year: '2022',
             image: 'album.jpeg',
-            isPublished: true,
+            isPublished: false,
         },{
             title: 'Never give up',
             artist_id: TheWeekend,

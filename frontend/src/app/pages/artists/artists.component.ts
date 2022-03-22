@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Artist } from '../../models/artist.model';
+import { Artist, ArtistPublish } from '../../models/artist.model';
 import { environment } from '../../../environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Observable } from 'rxjs';
-import { fetchArtistsRequest } from '../../store/artists/artists.actions';
+import { fetchArtistsRequest, publishArtistRequest } from '../../store/artists/artists.actions';
 
 @Component({
   selector: 'app-artists',
@@ -25,5 +25,16 @@ export class ArtistsComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(fetchArtistsRequest());
+  }
+
+  onPublish(_id: string, event: Event) {
+    event.stopPropagation();
+    const artistPublish: ArtistPublish = {
+      isPublished: true,
+    }
+
+    this.store.dispatch(publishArtistRequest({artistPublish: artistPublish, id: _id}));
+    this.store.dispatch(fetchArtistsRequest());
+
   }
 }

@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Observable, Subscription } from 'rxjs';
-import { Track } from '../../models/track.model';
-import { fetchTracksRequest } from '../../store/tracks/tracks.actions';
+import { Track, TrackPublish } from '../../models/track.model';
+import { fetchTracksRequest, publishTrackRequest } from '../../store/tracks/tracks.actions';
 import { ActivatedRoute } from '@angular/router';
 import { Album } from '../../models/album.model';
 import { environment } from '../../../environments/environment';
@@ -66,6 +66,14 @@ export class TracksComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.tracksSubscription.unsubscribe();
+  }
+
+  onPublish(_id: string) {
+    const track: TrackPublish = {
+      isPublished: true,
+    }
+
+    this.store.dispatch(publishTrackRequest({trackPublish: track, id: _id}));
   }
 }
 

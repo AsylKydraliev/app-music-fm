@@ -7,7 +7,7 @@ import {
   createAlbumSuccess,
   fetchAlbumsFailure,
   fetchAlbumsRequest,
-  fetchAlbumsSuccess
+  fetchAlbumsSuccess, publishAlbumRequest, publishAlbumSuccess
 } from './albums.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { AlbumsService } from '../../services/albums.service';
@@ -38,6 +38,21 @@ export class AlbumsEffects {
         catchError(() => of(createAlbumFailure({
           error: 'You need to register to add an album!'
         })))
+      )
+    ))
+  );
+
+  publishAlbum = createEffect(() => this.actions.pipe(
+    ofType(publishAlbumRequest),
+    mergeMap(({albumPublish, id}) => this.albumsService.publishAlbum(albumPublish, id).pipe(
+        map(() => {
+          console.log('ok')
+
+          return publishAlbumSuccess()
+        }),
+        tap(() => {
+          this.helpers.openSnackbar('Album published');
+        }),
       )
     ))
   );

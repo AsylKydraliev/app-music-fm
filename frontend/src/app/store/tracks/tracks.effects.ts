@@ -7,7 +7,9 @@ import {
   createTrackSuccess,
   fetchTracksFailure,
   fetchTracksRequest,
-  fetchTracksSuccess
+  fetchTracksSuccess,
+  publishTrackRequest,
+  publishTrackSuccess
 } from './tracks.actions';
 import { TracksService } from '../../services/tracks.service';
 import { HelpersService } from '../../services/helpers.service';
@@ -37,6 +39,17 @@ export class TracksEffects {
         catchError(() => of(createTrackFailure({
           error: 'You need to register to add an track!'
         })))
+      )
+    ))
+  );
+
+  publishTrack = createEffect(() => this.actions.pipe(
+    ofType(publishTrackRequest),
+    mergeMap(({trackPublish, id}) => this.tracksService.publishTrack(trackPublish, id).pipe(
+        map(() => publishTrackSuccess()),
+        tap(() => {
+          this.helpers.openSnackbar('Track published');
+        }),
       )
     ))
   );

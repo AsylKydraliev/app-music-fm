@@ -18,6 +18,10 @@ export interface TrackData {
   duration: string,
 }
 
+export interface TrackPublish {
+  isPublished: boolean,
+}
+
 export interface ApiTrackData {
   _id: string,
   title: string,

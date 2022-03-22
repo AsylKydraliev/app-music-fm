@@ -20,6 +20,10 @@ export interface AlbumData {
   image: File | null,
 }
 
+export interface AlbumPublish {
+  isPublished: boolean,
+}
+
 export interface ApiAlbumsData {
   _id: string,
   title: string,

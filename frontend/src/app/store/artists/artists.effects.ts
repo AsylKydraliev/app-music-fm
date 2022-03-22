@@ -7,7 +7,9 @@ import {
   createArtistSuccess,
   fetchArtistsFailure,
   fetchArtistsRequest,
-  fetchArtistsSuccess
+  fetchArtistsSuccess,
+  publishArtistRequest,
+  publishArtistSuccess
 } from './artists.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { HelpersService } from '../../services/helpers.service';
@@ -40,6 +42,17 @@ export class ArtistsEffects {
         })))
       )
     )));
+
+  publishArtist = createEffect(() => this.actions.pipe(
+    ofType(publishArtistRequest),
+    mergeMap(({artistPublish, id}) => this.artistsService.publishArtist(artistPublish, id).pipe(
+        map(() => publishArtistSuccess()),
+        tap(() => {
+          this.helpers.openSnackbar('Artist published');
+        }),
+      )
+    ))
+  );
 
   constructor(
     private actions: Actions,

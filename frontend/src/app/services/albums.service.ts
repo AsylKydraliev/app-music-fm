@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { AlbumData, ApiAlbumsData } from '../models/album.model';
+import { AlbumData, AlbumPublish, ApiAlbumsData } from '../models/album.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,10 @@ export class AlbumsService {
       }
     });
     return this.http.post<ApiAlbumsData>(environment.apiUrl + `/albums`, formData);
+  }
+
+  publishAlbum(albumPublish: AlbumPublish, id: string){
+    console.log(albumPublish)
+    return this.http.post(environment.apiUrl + `/albums/${id}/publish`, albumPublish);
   }
 }

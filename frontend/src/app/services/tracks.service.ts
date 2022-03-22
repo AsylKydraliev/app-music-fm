@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiTrackData, Track, TrackData } from '../models/track.model';
+import { ApiTrackData, Track, TrackData, TrackPublish } from '../models/track.model';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
@@ -29,5 +29,9 @@ export class TracksService {
 
   createTrack(trackData: TrackData){
     return this.http.post<ApiTrackData>(environment.apiUrl + '/tracks', trackData);
+  }
+
+  publishTrack(trackPublish: TrackPublish, id: string){
+    return this.http.post(environment.apiUrl + `/tracks/${id}/publish`, trackPublish);
   }
 }

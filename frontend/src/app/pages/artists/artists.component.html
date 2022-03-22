@@ -30,7 +30,8 @@
       </mat-card-title-group>
       <div>
         <a mat-raised-button>{{ (artist.isPublished === false) ? 'Not published' : ''}}</a>&nbsp;
-        <a mat-raised-button>{{ (artist.isPublished === false) ? 'Publish' : ''}}</a>
+        <a mat-raised-button (click)="onPublish(artist._id, $event)"
+        >{{ (artist.isPublished === false) ? 'Publish' : ''}}</a>
       </div>
     </mat-card>
   </div>

@@ -29,7 +29,8 @@
     </div>
     <div>
       <a mat-raised-button>{{ (track.isPublished === false) ? 'Not published': ''}}</a>&nbsp;
-      <a mat-raised-button>{{ (track.isPublished === false) ? 'Publish': ''}}</a>
+      <a mat-raised-button (click)="onPublish(track._id)"
+      >{{ (track.isPublished === false) ? 'Publish': ''}}</a>
     </div>
   </mat-card>
 </div>

@@ -5,7 +5,9 @@ import {
   createArtistSuccess,
   fetchArtistsFailure,
   fetchArtistsRequest,
-  fetchArtistsSuccess
+  fetchArtistsSuccess,
+  publishArtistRequest,
+  publishArtistSuccess
 } from './artists.actions';
 import { ArtistsState } from '../types';
 
@@ -15,6 +17,7 @@ const initialState: ArtistsState = {
   fetchError: null,
   createLoading: false,
   createError: null,
+  publishLoading: false,
 };
 
 export const artistsReducer = createReducer(
@@ -26,4 +29,7 @@ export const artistsReducer = createReducer(
   on(createArtistRequest, state => ({...state, createLoading: true,})),
   on(createArtistSuccess, state => ({...state, createLoading: false})),
   on(createArtistFailure, (state, {error}) => ({...state, createLoading: false, createError: error})),
+
+  on(publishArtistRequest, state => ({...state, publishLoading: true})),
+  on(publishArtistSuccess, state => ({...state, publishLoading: false})),
 )
