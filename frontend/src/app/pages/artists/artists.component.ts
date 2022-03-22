@@ -34,7 +34,6 @@ export class ArtistsComponent implements OnInit {
     }
 
     this.store.dispatch(publishArtistRequest({artistPublish: artistPublish, id: _id}));
-    this.store.dispatch(fetchArtistsRequest());
   }
 
   onRemove(_id: string) {

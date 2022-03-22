@@ -7,7 +7,11 @@ import {
   createAlbumSuccess,
   fetchAlbumsFailure,
   fetchAlbumsRequest,
-  fetchAlbumsSuccess, publishAlbumRequest, publishAlbumSuccess, removeAlbumRequest, removeAlbumSuccess
+  fetchAlbumsSuccess,
+  publishAlbumRequest,
+  publishAlbumSuccess,
+  removeAlbumRequest,
+  removeAlbumSuccess
 } from './albums.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { AlbumsService } from '../../services/albums.service';

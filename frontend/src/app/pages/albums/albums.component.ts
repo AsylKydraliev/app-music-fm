@@ -22,7 +22,7 @@ export class AlbumsComponent implements OnInit {
   error: Observable<null | string>;
   api = environment.apiUrl;
   title!: string;
-  artistId!: string;
+  artist_id!: string;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     this.albums = store.select(state => state.albums.albums);
@@ -34,7 +34,7 @@ export class AlbumsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.title = params['title'];
-      this.artistId = params['id'];
+      this.artist_id = params['id'];
       this.store.dispatch(fetchAlbumsRequest({artist_id: params['id']}));
     })
   }
@@ -45,7 +45,7 @@ export class AlbumsComponent implements OnInit {
     }
 
     this.store.dispatch(publishAlbumRequest({albumPublish: albumPublish, id: _id}));
-    this.store.dispatch(fetchAlbumsRequest({artist_id: this.artistId}));
+    this.store.dispatch(fetchAlbumsRequest({artist_id: this.artist_id}));
   }
 
   onDelete(_id: string) {

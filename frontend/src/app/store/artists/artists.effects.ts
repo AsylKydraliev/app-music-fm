@@ -17,6 +17,8 @@ import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { HelpersService } from '../../services/helpers.service';
 import { Router } from '@angular/router';
 import { ArtistsService } from '../../services/artists.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../types';
 
 @Injectable()
 
@@ -50,6 +52,7 @@ export class ArtistsEffects {
     mergeMap(({artistPublish, id}) => this.artistsService.publishArtist(artistPublish, id).pipe(
         map(() => publishArtistSuccess()),
         tap(() => {
+          this.store.dispatch(fetchArtistsRequest());
           this.helpers.openSnackbar('Artist published');
         }),
       )
@@ -73,6 +76,7 @@ export class ArtistsEffects {
     private artistsService: ArtistsService,
     private helpers: HelpersService,
     private router: Router,
+    private store: Store<AppState>,
   ) {}
 }
 
