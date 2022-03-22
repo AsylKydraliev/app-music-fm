@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Album, AlbumPublish } from '../../models/album.model';
-import { fetchAlbumsRequest, publishAlbumRequest } from '../../store/albums/albums.actions';
+import { fetchAlbumsRequest, publishAlbumRequest, removeAlbumRequest } from '../../store/albums/albums.actions';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user.model';
 
@@ -46,5 +46,9 @@ export class AlbumsComponent implements OnInit {
 
     this.store.dispatch(publishAlbumRequest({albumPublish: albumPublish, id: _id}));
     this.store.dispatch(fetchAlbumsRequest({artist_id: this.artistId}));
+  }
+
+  onDelete(_id: string) {
+    this.store.dispatch(removeAlbumRequest({id: _id}));
   }
 }

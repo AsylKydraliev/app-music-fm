@@ -24,6 +24,7 @@ export class TracksComponent implements OnInit, OnDestroy {
   slider = 0;
   idTrack!: string;
   interval = 0;
+  albumId!: string;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     this.tracks = store.select(state => state.tracks.tracks);
@@ -32,6 +33,7 @@ export class TracksComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+      this.albumId = params['id'];
       this.store.dispatch(fetchTracksRequest({album: params['id']}));
     })
     this.tracksSubscription = this.tracks.subscribe((tracks: Track[]) => {
@@ -74,6 +76,7 @@ export class TracksComponent implements OnInit, OnDestroy {
     }
 
     this.store.dispatch(publishTrackRequest({trackPublish: track, id: _id}));
+    this.store.dispatch(fetchTracksRequest({album: this.albumId}));
   }
 }
 

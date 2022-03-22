@@ -7,7 +7,7 @@ import {
   createAlbumSuccess,
   fetchAlbumsFailure,
   fetchAlbumsRequest,
-  fetchAlbumsSuccess, publishAlbumRequest, publishAlbumSuccess
+  fetchAlbumsSuccess, publishAlbumRequest, publishAlbumSuccess, removeAlbumRequest, removeAlbumSuccess
 } from './albums.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { AlbumsService } from '../../services/albums.service';
@@ -45,13 +45,20 @@ export class AlbumsEffects {
   publishAlbum = createEffect(() => this.actions.pipe(
     ofType(publishAlbumRequest),
     mergeMap(({albumPublish, id}) => this.albumsService.publishAlbum(albumPublish, id).pipe(
-        map(() => {
-          console.log('ok')
-
-          return publishAlbumSuccess()
-        }),
+        map(() => publishAlbumSuccess()),
         tap(() => {
           this.helpers.openSnackbar('Album published');
+        }),
+      )
+    ))
+  );
+
+  removeAlbum = createEffect(() => this.actions.pipe(
+    ofType(removeAlbumRequest),
+    mergeMap(({id}) => this.albumsService.removeAlbum(id).pipe(
+        map(() => removeAlbumSuccess()),
+        tap(() => {
+          this.helpers.openSnackbar('Album deleted');
         }),
       )
     ))

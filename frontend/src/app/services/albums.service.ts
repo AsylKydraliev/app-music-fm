@@ -22,7 +22,10 @@ export class AlbumsService {
   }
 
   publishAlbum(albumPublish: AlbumPublish, id: string){
-    console.log(albumPublish)
     return this.http.post(environment.apiUrl + `/albums/${id}/publish`, albumPublish);
+  }
+
+  removeAlbum(id: string){
+    return this.http.delete(environment.apiUrl + `/albums/${id}`);
   }
 }

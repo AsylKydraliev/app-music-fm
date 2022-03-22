@@ -39,7 +39,7 @@
         </mat-card-content>
         <div fxLayoutAlign="space-between">
           <a mat-raised-button [routerLink]="['/', album._id, 'tracks']">Tracks >></a>
-          <a mat-raised-button color="warn" *appRoles="['admin']">Delete</a>
+          <a mat-raised-button color="warn" *appRoles="['admin']" (click)="onDelete(album._id)">Delete</a>
         </div>
       </mat-card>
     </div>
