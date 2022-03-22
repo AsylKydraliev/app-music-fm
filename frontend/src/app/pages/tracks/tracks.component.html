@@ -2,7 +2,11 @@
   <h1>Tracks</h1>
 </div>
 
-<div>
+<mat-progress-spinner
+  *ngIf="loading | async else tracksArea" mode="indeterminate"
+></mat-progress-spinner>
+
+<ng-template #tracksArea>
   <mat-card class="example-card" *ngIf="album">
     <mat-card-title-group>
       <mat-card-title>{{ album?.title }}</mat-card-title>
@@ -28,10 +32,10 @@
       </span>
     </div>
     <div>
-      <a mat-raised-button>{{ (track.isPublished === false) ? 'Not published': ''}}</a>&nbsp;
+      <a mat-button disabled>{{ (track.isPublished === false) ? 'Not published': ''}}</a>&nbsp;
       <a mat-raised-button (click)="onPublish(track._id)"
       >{{ (track.isPublished === false) ? 'Publish': ''}}</a>
     </div>
   </mat-card>
-</div>
+</ng-template>
 

@@ -35,7 +35,7 @@ const run = async () => {
         title: 'TheWeekend',
         photo: 'weekend.jpeg',
         info: 'The best artist 2020!',
-        isPublished: false,
+        isPublished: true,
     }, {
         title: 'KanyeWest',
         photo: 'west.jpg',
@@ -53,19 +53,19 @@ const run = async () => {
             artist_id: TheWeekend,
             year: '2020',
             image: 'album.jpeg',
-            isPublished: false,
+            isPublished: true,
         }, {
             title: 'Fourth dimension',
             artist_id: KanyeWest,
             year: '2021',
             image: 'album.jpeg',
-            isPublished: false,
+            isPublished: true,
         }, {
             title: 'Songs for two',
             artist_id: Drake,
             year: '2022',
             image: 'album.jpeg',
-            isPublished: false,
+            isPublished: true,
         },{
             title: 'Never give up',
             artist_id: TheWeekend,
@@ -96,7 +96,7 @@ const run = async () => {
             title: 'New song',
             album: Fourth,
             duration: '3:20',
-            isPublished: true,
+            isPublished: false,
         }, {
             title: 'For two song',
             album: Songs,
@@ -126,7 +126,7 @@ const run = async () => {
             title: 'Song for new year Fourth',
             album: New,
             duration: '3:20',
-            isPublished: true,
+            isPublished: false,
         }, {
             title: 'Song for summer Fourth',
             album: New,

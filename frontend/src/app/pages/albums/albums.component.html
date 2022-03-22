@@ -16,15 +16,15 @@
       <mat-card class="example-card" *appHasRoles="{role: ['user', 'admin'], published: album.isPublished}">
         <div>
           <div fxLayoutAlign="space-between">
-            <a mat-button>{{ (album.isPublished === false) ? 'Not published': ''}}</a>
+            <a mat-button disabled>{{ (album.isPublished === false) ? 'Not published': ''}}</a>
             <a mat-button (click)="onPublish(album._id)"
             >{{ (album.isPublished === false) ? 'Publish': ''}}</a>
           </div>
-          <img
-            mat-card-image
-            [src]="api + '/uploads/' + album.image"
-            [alt]="album.title">
         </div>
+        <img
+          mat-card-image
+          [src]="api + '/uploads/' + album.image"
+          [alt]="album.title">
         <mat-card-title-group>
           <mat-card-title fxLayoutAlign="center center">
           <span class="material-icons">
@@ -38,8 +38,17 @@
           <strong>{{ album.year }}</strong>
         </mat-card-content>
         <div fxLayoutAlign="space-between">
-          <a mat-raised-button [routerLink]="['/', album._id, 'tracks']">Tracks >></a>
-          <a mat-raised-button color="warn" *appRoles="['admin']" (click)="onDelete(album._id)">Delete</a>
+          <a mat-raised-button [routerLink]="['/', album._id, 'tracks']" class="trackLink">
+            Tracks
+            <span class="material-icons">
+              queue_music
+            </span>
+          </a>
+          <a mat-raised-button class="delete" *appRoles="['admin']" (click)="onDelete(album._id)">
+            <span class="material-icons">
+              clear
+            </span>
+          </a>
         </div>
       </mat-card>
     </div>
