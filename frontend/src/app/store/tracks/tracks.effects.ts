@@ -9,7 +9,9 @@ import {
   fetchTracksRequest,
   fetchTracksSuccess,
   publishTrackRequest,
-  publishTrackSuccess
+  publishTrackSuccess,
+  removeTrackRequest,
+  removeTrackSuccess
 } from './tracks.actions';
 import { TracksService } from '../../services/tracks.service';
 import { HelpersService } from '../../services/helpers.service';
@@ -49,6 +51,17 @@ export class TracksEffects {
         map(() => publishTrackSuccess()),
         tap(() => {
           this.helpers.openSnackbar('Track published');
+        }),
+      )
+    ))
+  );
+
+  removeArtist = createEffect(() => this.actions.pipe(
+    ofType(removeTrackRequest),
+    mergeMap(({id}) => this.tracksService.removeTrack(id).pipe(
+        map(() => removeTrackSuccess()),
+        tap(() => {
+          this.helpers.openSnackbar('Track deleted');
         }),
       )
     ))

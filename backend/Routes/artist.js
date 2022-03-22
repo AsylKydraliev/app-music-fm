@@ -70,7 +70,7 @@ router.post('/:id/publish', authorization, permit('admin'), async (req, res, nex
     try{
         await Artist.updateOne({_id: req.params.id}, {isPublished: req.body.isPublished});
 
-        return res.send("Published!");
+        return res.send({message: 'Published!'});
     }catch (e){
         next(e);
     }

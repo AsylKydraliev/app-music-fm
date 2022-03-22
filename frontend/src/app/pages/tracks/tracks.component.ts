@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Observable, Subscription } from 'rxjs';
 import { Track, TrackPublish } from '../../models/track.model';
-import { fetchTracksRequest, publishTrackRequest } from '../../store/tracks/tracks.actions';
+import { fetchTracksRequest, publishTrackRequest, removeTrackRequest } from '../../store/tracks/tracks.actions';
 import { ActivatedRoute } from '@angular/router';
 import { Album } from '../../models/album.model';
 import { environment } from '../../../environments/environment';
@@ -77,6 +77,10 @@ export class TracksComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(publishTrackRequest({trackPublish: track, id: _id}));
     this.store.dispatch(fetchTracksRequest({album: this.albumId}));
+  }
+
+  onRemove(_id: string) {
+    this.store.dispatch(removeTrackRequest({id: _id}));
   }
 }
 

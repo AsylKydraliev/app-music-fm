@@ -8,8 +8,10 @@ import {
   fetchTracksRequest,
   fetchTracksSuccess,
   publishTrackRequest,
-  publishTrackSuccess
+  publishTrackSuccess,
+  removeTrackRequest
 } from './tracks.actions';
+import { removeArtistSuccess } from '../artists/artists.actions';
 
 const initialState: TracksState = {
   tracks: [],
@@ -18,6 +20,7 @@ const initialState: TracksState = {
   createLoading: false,
   createError: null,
   publishLoading: false,
+  removeLoading: false,
 }
 export const tracksReducer = createReducer(
   initialState,
@@ -31,4 +34,13 @@ export const tracksReducer = createReducer(
 
   on(publishTrackRequest, state => ({...state, publishLoading: true})),
   on(publishTrackSuccess, state => ({...state, publishLoading: false})),
+
+  on(removeTrackRequest, (state, {id}) => {
+    const updateTrack = state.tracks.filter(track => {
+      return track._id !== id;
+    });
+
+    return {...state, tracks: updateTrack, removeLoading: true}
+  }),
+  on(removeArtistSuccess, state => ({...state, publishLoading: false})),
 )
