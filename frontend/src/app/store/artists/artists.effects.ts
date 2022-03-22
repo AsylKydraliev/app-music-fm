@@ -9,7 +9,9 @@ import {
   fetchArtistsRequest,
   fetchArtistsSuccess,
   publishArtistRequest,
-  publishArtistSuccess
+  publishArtistSuccess,
+  removeArtistRequest,
+  removeArtistSuccess
 } from './artists.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { HelpersService } from '../../services/helpers.service';
@@ -49,6 +51,17 @@ export class ArtistsEffects {
         map(() => publishArtistSuccess()),
         tap(() => {
           this.helpers.openSnackbar('Artist published');
+        }),
+      )
+    ))
+  );
+
+  removeArtist = createEffect(() => this.actions.pipe(
+    ofType(removeArtistRequest),
+    mergeMap(({id}) => this.artistsService.removeArtist(id).pipe(
+        map(() => removeArtistSuccess()),
+        tap(() => {
+          this.helpers.openSnackbar('Artist deleted');
         }),
       )
     ))

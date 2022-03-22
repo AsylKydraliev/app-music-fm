@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { Observable } from 'rxjs';
-import { fetchArtistsRequest, publishArtistRequest } from '../../store/artists/artists.actions';
+import { fetchArtistsRequest, publishArtistRequest, removeArtistRequest } from '../../store/artists/artists.actions';
 
 @Component({
   selector: 'app-artists',
@@ -36,5 +36,9 @@ export class ArtistsComponent implements OnInit {
     this.store.dispatch(publishArtistRequest({artistPublish: artistPublish, id: _id}));
     this.store.dispatch(fetchArtistsRequest());
 
+  }
+
+  onRemove(_id: string) {
+    this.store.dispatch(removeArtistRequest({id: _id}));
   }
 }

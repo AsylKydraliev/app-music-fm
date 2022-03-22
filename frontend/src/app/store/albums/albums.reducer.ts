@@ -6,7 +6,11 @@ import {
   createAlbumSuccess,
   fetchAlbumsFailure,
   fetchAlbumsRequest,
-  fetchAlbumsSuccess, publishAlbumRequest, publishAlbumSuccess, removeAlbumRequest, removeAlbumSuccess
+  fetchAlbumsSuccess,
+  publishAlbumRequest,
+  publishAlbumSuccess,
+  removeAlbumRequest,
+  removeAlbumSuccess
 } from './albums.actions';
 
 const initialState: AlbumsState = {
