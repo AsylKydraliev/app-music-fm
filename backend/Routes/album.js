@@ -79,9 +79,9 @@ router.get('/:_id', async (req, res, next) => {
 
 router.post('/:id/publish', authorization, permit('admin'), async (req, res, next) => {
     try{
-        const album = await Album.updateOne({_id: req.params.id}, {isPublished: req.body.isPublished});
+        await Album.updateOne({_id: req.params.id}, {isPublished: req.body.isPublished});
 
-        return res.send(album);
+        return res.send('Published!');
     }catch (e){
         next(e);
     }

@@ -66,4 +66,14 @@ router.post('/', authorization, permit('user', 'admin'), upload.single('photo'),
     }
 });
 
+router.post('/:id/publish', authorization, permit('admin'), async (req, res, next) => {
+    try{
+        await Artist.updateOne({_id: req.params.id}, {isPublished: req.body.isPublished});
+
+        return res.send("Published!");
+    }catch (e){
+        next(e);
+    }
+});
+
 module.exports = router;

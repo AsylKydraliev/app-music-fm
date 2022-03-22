@@ -89,4 +89,14 @@ router.get('/byAlbum/:id', async(req,res,next) => {
     }
 });
 
+router.post('/:id/publish', authorization, permit('admin'), async (req, res, next) => {
+    try{
+        await Track.updateOne({_id: req.params.id}, {isPublished: req.body.isPublished});
+
+        return res.send("Published!");
+    }catch (e){
+        next(e);
+    }
+});
+
 module.exports = router;
