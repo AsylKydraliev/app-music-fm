@@ -10,6 +10,7 @@ import { FormAlbumComponent } from './pages/form-album/form-album.component';
 import { FormArtistComponent } from './pages/form-artist/form-artist.component';
 import { FormTrackComponent } from './pages/form-track/form-track.component';
 import { RoleGuardService } from './services/role-guard.service';
+import { NotFoundComponent } from './not-found.component';
 
 const routes: Routes = [
   {path: '', component: ArtistsComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
     data: {roles: ['admin', 'user']}},
   {path: 'addTrack', component: FormTrackComponent,  canActivate: [RoleGuardService],
     data: {roles: ['admin', 'user']}},
+  {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({
