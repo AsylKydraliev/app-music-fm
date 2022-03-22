@@ -87,4 +87,14 @@ router.post('/:id/publish', authorization, permit('admin'), async (req, res, nex
     }
 });
 
+router.delete('/:id', authorization, permit('admin'), async (req, res, next) => {
+    try{
+        const album = await Album.findByIdAndRemove({_id: req.params.id});
+
+        return res.send(album);
+    }catch (e){
+        next(e);
+    }
+});
+
 module.exports = router;

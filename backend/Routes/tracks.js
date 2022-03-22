@@ -99,4 +99,14 @@ router.post('/:id/publish', authorization, permit('admin'), async (req, res, nex
     }
 });
 
+router.delete('/:id', authorization, permit('admin'), async (req, res, next) => {
+    try{
+        const track = await Track.findByIdAndRemove({_id: req.params.id});
+
+        return res.send(track);
+    }catch (e){
+        next(e);
+    }
+});
+
 module.exports = router;
