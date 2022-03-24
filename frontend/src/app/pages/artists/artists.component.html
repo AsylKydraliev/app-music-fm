@@ -7,50 +7,27 @@
 ></mat-progress-spinner>
 
 <ng-template #artistsArea>
-  <div class="content" fxLayout="column"
-       [routerLink]="[artist._id,artist.title, 'artistAlbums']"
-       *ngFor="let artist of artists | async">
-    <mat-card
-      *appHasRoles="{role: ['user', 'admin'], published: artist.isPublished}"
-      fxLayout="column" fxLayoutAlign="space-between"
-    >
-      <mat-card-title-group>
-        <mat-card-title fxLayoutAlign="center center">
-        <span class="material-icons">
-          library_music
-        </span>
-          {{ artist.title }}
+  <div class="block">
+    <div [routerLink]="[artist._id,artist.title, 'artistAlbums']" *ngFor="let artist of artists | async" class="box">
+
+      <div *appHasRoles="{role: ['user', 'admin'], published: artist.isPublished}" fxLayout="column">
+        <mat-card-title>
+          <h1 fxLayoutAlign="space-between">{{ artist.title }}
+            <span class="material-icons" *appRoles="['admin']" (click)="onRemove(artist._id)">delete</span>
+          </h1>
         </mat-card-title>
-        <mat-card-content>
-          <img
-            mat-card-md-image
-            [src]="api + '/uploads/' + artist.photo"
-            [alt]="artist.title">
-        </mat-card-content>
-      </mat-card-title-group>
-      <div>
+        <div class="opacity_img">
+          <img mat-card-image [src]="api + '/uploads/' + artist.photo" [alt]="artist.title">
+          <span class="material-icons play">
+            play_circle_outline
+          </span>
+        </div>
         <button mat-button disabled>{{ (artist.isPublished === false) ? 'Not published' : ''}}</button>&nbsp;
+        <a mat-raised-button color="primary" (click)="onPublish(artist._id, $event)" *ngIf="!(artist.isPublished)">
+        {{ (artist.isPublished === false) ? 'Publish >>' : ''}}
+        </a>
       </div>
-      <a mat-raised-button
-         color="primary"
-         (click)="onPublish(artist._id, $event)"
-         *ngIf="!(artist.isPublished)"
-      >
-      <span class="material-icons">
-          {{ (artist.isPublished === false) ? 'publish' : ''}}
-      </span>
-      </a>
-      <button
-        *appRoles="['admin']" mat-raised-button
-        (click)="onRemove(artist._id)"
-        class="removeBtn"
-        color="warn"
-      >
-        <span class="material-icons">
-          delete
-        </span>
-      </button>
-    </mat-card>
+    </div>
   </div>
 </ng-template>
 
