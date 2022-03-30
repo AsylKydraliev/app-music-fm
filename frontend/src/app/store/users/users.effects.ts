@@ -3,6 +3,8 @@ import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import {
+  loginFbFailure,
+  loginFbRequest, loginFbSuccess,
   loginUsersFailure,
   loginUsersRequest,
   loginUsersSuccess,
@@ -38,6 +40,18 @@ export class UsersEffects {
         void this.router.navigate(['/']);
       }),
       this.helpers.catchServerError(loginUsersFailure)
+    ))
+  ))
+
+  loginFb = createEffect(() => this.actions.pipe(
+    ofType(loginFbRequest),
+    mergeMap(({userData}) => this.usersService.loginFb(userData).pipe(
+      map(user => loginFbSuccess({user})),
+      tap(() => {
+        this.helpers.openSnackbar('Login successful');
+        void this.router.navigate(['/']);
+      }),
+      this.helpers.catchServerError(loginFbFailure)
     ))
   ))
 

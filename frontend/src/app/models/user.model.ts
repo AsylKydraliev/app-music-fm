@@ -4,7 +4,7 @@ export interface User {
   displayName: string,
   avatar: File | null,
   token: string,
-  role: string
+  role: string,
 }
 
 export interface RegisterUser {
@@ -17,6 +17,13 @@ export interface RegisterUser {
 export interface LoginUserData {
   email: string,
   password: string
+}
+
+export interface fbLoginUserData {
+  authToken: string,
+  id: string,
+  email: string,
+  name: string
 }
 
 export interface FieldError {

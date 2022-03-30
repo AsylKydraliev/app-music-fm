@@ -4,7 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { LoginError, LoginUserData } from '../../models/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
-import { loginUsersRequest } from '../../store/users/users.actions';
+import { loginFbRequest, loginUsersRequest } from '../../store/users/users.actions';
 import { FacebookLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 
 @Component({
@@ -26,7 +26,14 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.authStateSub = this.auth.authState.subscribe((user: SocialUser) => {
-      console.log(user);
+      const userData = {
+        authToken: user.authToken,
+        id: user.id,
+        email: user.email,
+        name: user.name
+      }
+
+      this.store.dispatch(loginFbRequest({userData: userData}));
     })
   }
 
