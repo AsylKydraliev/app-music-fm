@@ -29,7 +29,8 @@ export type UserState = {
   registerLoading: boolean,
   registerError: null | RegisterError,
   loginLoading: boolean,
-  loginError: null | LoginError
+  loginError: null | LoginError,
+  fbLoading: boolean
 };
 
 export type TracksState = {

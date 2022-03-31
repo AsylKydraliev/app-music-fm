@@ -94,22 +94,6 @@ router.delete('/sessions', async (req, res, next) => {
 
 router.post('/facebookLogin', async (req, res, next) => {
     try{
-        // const inputToken = req.body.authToken;
-        // const accessToken = config.facebook.appId + '|' + config.facebook.appSecret;
-        // const debugTokenUrl = `https://graph.facebook.com/debug_token?input_token=${inputToken}&accessToken=${accessToken}`;
-        //
-        // const response = await axios.get(debugTokenUrl);
-        //
-        // if(response.data.data.error) {
-        //     return res.status(401).send({error: 'Facebook token incorrect!'});
-        // }
-        //
-        // if(req.body.id !== response.data.data.user_id) {
-        //     return res.status(401).send({error: 'Wrong user id!'});
-        // }
-        //
-        // let user = await User.findOne({facebookId: req.body.id});
-
         const inputToken = req.body.authToken;
         const accessToken = config.facebook.appId + '|' + config.facebook.appSecret;
 

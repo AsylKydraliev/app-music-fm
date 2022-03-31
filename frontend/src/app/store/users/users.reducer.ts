@@ -17,6 +17,7 @@ const initialState: UserState = {
   registerError: null,
   loginLoading: false,
   loginError: null,
+  fbLoading: false
 }
 
 export const usersReducer = createReducer(
@@ -29,9 +30,9 @@ export const usersReducer = createReducer(
   on(loginUsersSuccess, (state, {user}) => ({...state, loginLoading: false, user})),
   on(loginUsersFailure, (state, {error}) => ({...state, loginLoading: false, loginError: error})),
 
-  on(loginFbRequest, state => ({...state, loginLoading: true, loginError: null})),
-  on(loginFbSuccess, (state, {user}) => ({...state, loginLoading: false, user})),
-  on(loginFbFailure, (state, {error}) => ({...state, loginLoading: false, loginError: error})),
+  on(loginFbRequest, state => ({...state, fbLoading: true, loginError: null})),
+  on(loginFbSuccess, (state, {user}) => ({...state, fbLoading: false, user})),
+  on(loginFbFailure, (state, {error}) => ({...state, fbLoading: false, loginError: error})),
 
   on(logoutUser, state => ({...state, user: null})),
 )

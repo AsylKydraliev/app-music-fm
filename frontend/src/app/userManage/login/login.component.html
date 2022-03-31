@@ -61,6 +61,7 @@
           &nbsp;&nbsp;
           SIGN IN WITH FACEBOOK
         </button>
+        <mat-progress-bar mode="indeterminate" *ngIf="(fbLoading | async)"></mat-progress-bar>
       </form>
     </mat-card-content>
   </mat-card>
