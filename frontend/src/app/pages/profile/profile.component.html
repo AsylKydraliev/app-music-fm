@@ -1,0 +1,23 @@
+<mat-card class="example-card" style="max-width: 30rem; height: 50%; margin: 0 auto">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image">
+      <img [src]="api + '/uploads/' + (user | async)?.avatar" alt="avatar user">
+    </div>
+    <mat-card-title>{{(user | async)?.displayName}}</mat-card-title>
+    <mat-card-subtitle>{{ (user | async)?.email }}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTh8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80"
+    alt="music image"
+  >
+  <mat-card-content>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, id.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-raised-button routerLink="/addArtist">Add artist</a>
+    <a mat-raised-button routerLink="/addAlbum">Add album</a>
+    <a mat-raised-button routerLink="/addTrack">Add track</a>
+  </mat-card-actions>
+</mat-card>
+

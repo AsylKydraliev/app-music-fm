@@ -48,7 +48,7 @@ export class UsersEffects {
     mergeMap(({userData}) => this.usersService.loginFb(userData).pipe(
       map(user => loginFbSuccess({user})),
       tap(() => {
-        this.helpers.openSnackbar('Login successful');
+        this.helpers.openSnackbar('Sign up with facebook successful');
         void this.router.navigate(['/']);
       }),
       this.helpers.catchServerError(loginFbFailure)

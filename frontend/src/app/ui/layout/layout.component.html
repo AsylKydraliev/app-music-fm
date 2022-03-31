@@ -30,7 +30,7 @@
         </button>
         <a routerLink="/" mat-button fxLayoutAlign="center" class="logoLink">
          <span class="material-icons">headphones</span>
-          iTunes
+          iMusic
          </a>
       </div>
       <nav *ngIf="!(user | async) else userMenu">
@@ -46,8 +46,8 @@
 
 <ng-template #userMenu>
   <nav>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon class="register">account_circle</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="avatar">
+      <img [src]="api + '/uploads/' + (user | async)?.avatar" alt="avatar user">
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item disabled>{{ (user | async)?.email }}</button>

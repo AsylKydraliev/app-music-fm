@@ -11,6 +11,7 @@ import { FormArtistComponent } from './pages/form-artist/form-artist.component';
 import { FormTrackComponent } from './pages/form-track/form-track.component';
 import { RoleGuardService } from './services/role-guard.service';
 import { NotFoundComponent } from './not-found.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   {path: '', component: ArtistsComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: ':id/tracks', component: TracksComponent},
   {path: 'registration', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'profile', component: ProfileComponent},
   {path: 'addArtist', component: FormArtistComponent, canActivate: [RoleGuardService],
     data: {roles: ['admin', 'user']}},
   {path: 'addAlbum', component: FormAlbumComponent,  canActivate: [RoleGuardService],
