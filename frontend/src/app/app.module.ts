@@ -41,6 +41,7 @@ import { RolesDirective } from './directives/roles.directive';
 import { NotFoundComponent } from './not-found.component';
 import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { environment } from '../environments/environment';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -69,7 +70,8 @@ const socialConfig: SocialAuthServiceConfig = {
     FormTrackComponent,
     HasRolesDirective,
     RolesDirective,
-    NotFoundComponent
+    NotFoundComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

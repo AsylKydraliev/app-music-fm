@@ -51,6 +51,7 @@
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item disabled>{{ (user | async)?.email }}</button>
+      <a mat-menu-item routerLink="/profile">Profile</a>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   </nav>

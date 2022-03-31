@@ -23,7 +23,8 @@ export interface fbLoginUserData {
   authToken: string,
   id: string,
   email: string,
-  name: string
+  name: string,
+  avatar: string
 }
 
 export interface FieldError {
