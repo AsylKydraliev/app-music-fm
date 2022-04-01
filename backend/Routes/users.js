@@ -7,6 +7,9 @@ const User = require('../models/User');
 const config = require("../config");
 const axios = require("axios");
 
+const fetch = require('node-fetch');
+const fs = require('fs');
+
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -112,10 +115,11 @@ router.post('/facebookLogin', async (req, res, next) => {
         let user = await User.findOne({facebookId: req.body.id});
 
         if(!user){
-            const avatarUrl = nanoid() + '.jpeg';
+            user = await User.findOne({email: req.body.email});
+        }
 
-            const fetch = require('node-fetch');
-            const fs = require('fs');
+        if(!user){
+            const avatarUrl = nanoid() + '.jpeg';
 
             function downloadFile(url, path) {
                 return fetch(url).then(res => {
@@ -135,7 +139,6 @@ router.post('/facebookLogin', async (req, res, next) => {
         }
 
         user.generateToken();
-        console.log(user)
 
         await user.save();
 
@@ -169,9 +172,6 @@ router.post('/googleLogin', async (req, res, next) => {
         }
 
         if(!user){
-            const fetch = require('node-fetch');
-            const fs = require('fs');
-
             function downloadFile(url, path) {
                 return fetch(url).then(res => {
                     res.body.pipe(fs.createWriteStream(path));
@@ -190,7 +190,6 @@ router.post('/googleLogin', async (req, res, next) => {
         }
 
         user.generateToken();
-        console.log(user)
         await user.save();
 
         return res.send(user);

@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy{
   @ViewChild('f') form!: NgForm;
   loading: Observable<boolean>;
   fbLoading: Observable<boolean>;
+  googleLoading: Observable<boolean>;
   error: Observable<null | LoginError>;
   authStateSub!: Subscription;
   fbUserData!: fbLoginUserData;
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy{
   constructor(private store: Store<AppState>, private auth: SocialAuthService) {
     this.loading = store.select(state => state.users.loginLoading);
     this.fbLoading = store.select(state => state.users.fbLoading);
+    this.googleLoading = store.select(state => state.users.googleLoading);
     this.error = store.select(state => state.users.loginError);
   }
 

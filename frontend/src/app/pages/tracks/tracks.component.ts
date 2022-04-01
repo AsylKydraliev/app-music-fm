@@ -66,10 +66,6 @@ export class TracksComponent implements OnInit, OnDestroy {
     clearInterval(this.interval);
   };
 
-  ngOnDestroy(){
-    this.tracksSubscription.unsubscribe();
-  }
-
   onPublish(_id: string) {
     const track: TrackPublish = {
       isPublished: true,
@@ -81,6 +77,10 @@ export class TracksComponent implements OnInit, OnDestroy {
 
   onRemove(_id: string) {
     this.store.dispatch(removeTrackRequest({id: _id}));
+  }
+
+  ngOnDestroy(){
+    this.tracksSubscription.unsubscribe();
   }
 }
 

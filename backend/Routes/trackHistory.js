@@ -33,10 +33,6 @@ router.get('/', authorization, async (req, res, next) => {
     try {
         const histories = await TrackHistory.find({user: req.user._id}).sort({datetime: -1}).populate('track','_id title');
 
-        if(!histories){
-
-        }
-
         const tracks = histories.map(history => history.track._id);
 
         const albumsIdArray = [];
@@ -72,7 +68,6 @@ router.get('/', authorization, async (req, res, next) => {
         });
 
         return res.send(result)
-
     } catch (error) {
         next(error)
     }
