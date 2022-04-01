@@ -18,6 +18,7 @@ export class RegisterComponent implements AfterViewInit, OnInit, OnDestroy {
   errorSubscription!: Subscription;
   loading: Observable<boolean>;
   fbLoading: Observable<boolean>;
+  googleLoading: Observable<boolean>;
   authStateSub!: Subscription;
   fbUserData!: fbLoginUserData;
   googleUserData!: googleLoginUserData;
@@ -27,6 +28,7 @@ export class RegisterComponent implements AfterViewInit, OnInit, OnDestroy {
   constructor(private store: Store<AppState>, private auth: SocialAuthService) {
     this.error = store.select(state => state.users.registerError);
     this.loading = store.select(state => state.users.registerLoading);
+    this.googleLoading = store.select(state => state.users.googleLoading);
     this.fbLoading = store.select(state => state.users.fbLoading);
   }
 

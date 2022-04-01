@@ -102,6 +102,7 @@
           &nbsp;&nbsp;
           <span class="btn_text">REGISTER WITH GOOGLE</span>
         </button>
+        <mat-progress-bar mode="indeterminate" *ngIf="(googleLoading | async)"></mat-progress-bar>
       </form>
     </mat-card-content>
   </mat-card>
