@@ -37,7 +37,7 @@ const UserSchema = new Schema({
         enum: ['user', 'admin'],
     },
     facebookId: String,
-
+    googleId: String,
 });
 
 const SALT_WORK_FACTOR = 10;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { fbLoginUserData, LoginUserData, RegisterUser, User } from '../models/user.model';
+import { fbLoginUserData, googleLoginUserData, LoginUserData, RegisterUser, User } from '../models/user.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -29,6 +29,10 @@ export class UsersService {
 
   loginFb(userData: fbLoginUserData){
     return this.http.post<User>(environment.apiUrl + '/users/facebookLogin', userData);
+  }
+
+  loginGoogle(userData: googleLoginUserData){
+    return this.http.post<User>(environment.apiUrl + '/users/googleLogin', userData);
   }
 
   logoutUser(){

@@ -27,6 +27,15 @@ export interface fbLoginUserData {
   avatar: string
 }
 
+export interface googleLoginUserData {
+  authToken: string,
+  id: string,
+  email: string,
+  name: string,
+  avatar: string,
+  accessToken: string
+}
+
 export interface FieldError {
   message: string
 }

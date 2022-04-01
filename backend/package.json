@@ -19,6 +19,7 @@
     "mongoose": "^6.2.3",
     "multer": "^1.4.4",
     "nanoid": "^3.3.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "passport-google-oauth20": "^2.0.0"
   }
 }

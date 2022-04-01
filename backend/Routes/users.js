@@ -98,7 +98,6 @@ router.post('/facebookLogin', async (req, res, next) => {
         const accessToken = config.facebook.appId + '|' + config.facebook.appSecret;
 
         const debugTokenUrl = `https://graph.facebook.com/debug_token?input_token=${inputToken}&access_token=${accessToken}`;
-        const avatarUrl = nanoid() + '.jpg';
 
         const response = await axios.get(debugTokenUrl);
 
@@ -113,6 +112,8 @@ router.post('/facebookLogin', async (req, res, next) => {
         let user = await User.findOne({facebookId: req.body.id});
 
         if(!user){
+            const avatarUrl = nanoid() + '.jpeg';
+
             const fetch = require('node-fetch');
             const fs = require('fs');
 
@@ -134,6 +135,62 @@ router.post('/facebookLogin', async (req, res, next) => {
         }
 
         user.generateToken();
+        console.log(user)
+
+        await user.save();
+
+        return res.send(user);
+    }catch (e) {
+        next(e);
+    }
+});
+
+router.post('/googleLogin', async (req, res, next) => {
+    try{
+        const accessToken = req.body.accessToken;
+
+        const debugTokenUrl = `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`;
+        const avatarUrl = nanoid() + '.jpeg';
+
+        const response = await axios.get(debugTokenUrl);
+
+        if (response.error) {
+            return res.status(401).send({message: 'Google token incorrect'});
+        }
+
+        if (req.body.id !== response.data.id) {
+            return res.status(401).send({message: 'Wrong user ID'});
+        }
+
+        let user = await User.findOne({googleId: req.body.id});
+
+        if(!user){
+            user = await User.findOne({email: req.body.email});
+        }
+
+        if(!user){
+            const fetch = require('node-fetch');
+            const fs = require('fs');
+
+            function downloadFile(url, path) {
+                return fetch(url).then(res => {
+                    res.body.pipe(fs.createWriteStream(path));
+                });
+            }
+
+            downloadFile(req.body.avatar, `./public/uploads/${avatarUrl}`);
+
+            user = new User({
+                email: req.body.email,
+                password: nanoid(),
+                googleId: req.body.id,
+                displayName: req.body.name,
+                avatar: avatarUrl
+            })
+        }
+
+        user.generateToken();
+        console.log(user)
         await user.save();
 
         return res.send(user);

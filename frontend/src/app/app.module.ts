@@ -39,18 +39,29 @@ import { MatSelectModule } from '@angular/material/select';
 import { HasRolesDirective } from './directives/has-roles.directive';
 import { RolesDirective } from './directives/roles.directive';
 import { NotFoundComponent } from './not-found.component';
-import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialAuthServiceConfig,
+  SocialLoginModule
+} from 'angularx-social-login';
 import { environment } from '../environments/environment';
 import { ProfileComponent } from './pages/profile/profile.component';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
-  providers: [{
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider(environment.fbAppId, {
-      scope: 'email,public_profile'
-    })
-  }]
+  providers: [
+    {
+      id: FacebookLoginProvider.PROVIDER_ID,
+      provider: new FacebookLoginProvider(environment.fbAppId, {
+        scope: 'email,public_profile'
+      })
+  },
+    {
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider(environment.googleAppId)
+    }
+  ]
 }
 
 @NgModule({

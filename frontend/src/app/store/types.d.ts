@@ -30,7 +30,8 @@ export type UserState = {
   registerError: null | RegisterError,
   loginLoading: boolean,
   loginError: null | LoginError,
-  fbLoading: boolean
+  fbLoading: boolean,
+  googleLoading: boolean,
 };
 
 export type TracksState = {
