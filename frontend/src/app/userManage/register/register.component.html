@@ -90,6 +90,18 @@
           REGISTER WITH FACEBOOK
         </button>
         <mat-progress-bar mode="indeterminate" *ngIf="(fbLoading | async)"></mat-progress-bar>
+
+        <button
+          type="button"
+          mat-raised-button
+          color="default"
+          (click)="googleLogin()"
+          style="margin-top: 16px"
+        >
+          <img src="assets/icons/google.svg" alt="facebook logo">
+          &nbsp;&nbsp;
+          <span class="btn_text">REGISTER WITH GOOGLE</span>
+        </button>
       </form>
     </mat-card-content>
   </mat-card>
